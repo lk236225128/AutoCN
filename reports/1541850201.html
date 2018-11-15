@@ -1,0 +1,1730 @@
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> - TestReport</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      color: #333;
+      margin: 0 auto;
+      width: 960px;
+    }
+    #summary {
+      width: 960px;
+      margin-bottom: 20px;
+    }
+    #summary th {
+      background-color: skyblue;
+      padding: 5px 12px;
+    }
+    #summary td {
+      background-color: lightblue;
+      text-align: center;
+      padding: 4px 8px;
+    }
+    .details {
+      width: 960px;
+      margin-bottom: 20px;
+    }
+    .details th {
+      background-color: skyblue;
+      padding: 5px 12px;
+    }
+    .details tr .passed {
+      background-color: lightgreen;
+    }
+    .details tr .failed {
+      background-color: red;
+    }
+    .details tr .unchecked {
+      background-color: gray;
+    }
+    .details td {
+      background-color: lightblue;
+      padding: 5px 12px;
+    }
+    .details .detail {
+      background-color: lightgrey;
+      font-size: smaller;
+      padding: 5px 10px;
+      text-align: center;
+    }
+    .details .success {
+      background-color: greenyellow;
+    }
+    .details .error {
+      background-color: red;
+    }
+    .details .failure {
+      background-color: salmon;
+    }
+    .details .skipped {
+      background-color: gray;
+    }
+
+    .button {
+      font-size: 1em;
+      padding: 6px;
+      width: 4em;
+      text-align: center;
+      background-color: #06d85f;
+      border-radius: 20px/50px;
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+    }
+    a.button{
+      color: gray;
+      text-decoration: none;
+    }
+    .button:hover {
+      background: #2cffbd;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      transition: opacity 500ms;
+      visibility: hidden;
+      opacity: 0;
+    }
+    .overlay:target {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup {
+      margin: 70px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      width: 50%;
+      position: relative;
+      transition: all 3s ease-in-out;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #333;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+    }
+    .popup .close:hover {
+      color: #06d85f;
+    }
+    .popup .content {
+      max-height: 80%;
+      overflow: auto;
+      text-align: left;
+    }
+
+    @media screen and (max-width: 700px) {
+      .box {
+        width: 70%;
+      }
+      .popup {
+        width: 70%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Test Report: </h1>
+
+  <h2>Summary</h2>
+  <table id="summary">
+
+    <tr>
+      <th>START AT</th>
+      <td colspan="4">2018-11-10 11:43:21</td>
+    </tr>
+    <tr>
+      <th>DURATION</th>
+      <td colspan="4">9.847 seconds</td>
+    </tr>
+    <tr>
+      <th>PLATFORM</th>
+      <td>HttpRunner 1.5.15 </td>
+      <td>CPython 3.6.2 </td>
+      <td colspan="2">Darwin-16.7.0-x86_64-i386-64bit</td>
+    </tr>
+    <tr>
+      <th>TOTAL</th>
+      <th>SUCCESS</th>
+      <th>FAILED</th>
+      <th>ERROR</th>
+      <th>SKIPPED</th>
+      <!-- <th>ExpectedFailure</th>
+      <th>UnexpectedSuccess</th> -->
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <!-- <td>0</td>
+      <td>0</td> -->
+    </tr>
+  </table>
+
+  <h2>Details</h2>
+
+  
+  
+  <h3>測試</h3>
+  <table id="suite_1" class="details">
+    <tr>
+      <th>base_url</th>
+      <td colspan="2">https://www.8891.com.tw</td>
+      <th colspan="2" class="detail">
+        <a class="button" href="#suite_output_1">parameters & output</a>
+        <div id="suite_output_1" class="overlay">
+            <div class="popup">
+                <h2>Parameters and Output</h2>
+                <a class="close" href="#suite_1">&times;</a>
+                <div class="content">
+                  <div style="overflow: auto">
+                      <table>
+                        <tr>
+                          <th>variables</th>
+                          <th>output</th>
+                        </tr>
+                        
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL: 2</td>
+      <td>SUCCESS: 0</td>
+      <td>FAILED: 2</td>
+      <td>ERROR: 0</td>
+      <td>SKIPPED: 0</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th colspan="2">Name</th>
+      <th>Response Time</th>
+      <th>Detail</th>
+    </tr>
+
+    
+    
+    <tr id="record_1_1">
+      <th class="failure" style="width:5em;">failure</td>
+      <td colspan="2">登錄-個人賣家登錄</td>
+      <td style="text-align:center;width:6em;">2792.39 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_1">log</a>
+        <div id="popup_log_1_1" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_1">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www.8891.com.tw/api/v3/u/login/?api=3.7
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>User-Agent</strong>: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                          </div>
+                          
+                          <div>
+                            <strong>Accept-Encoding</strong>: gzip, deflate
+                          </div>
+                          
+                          <div>
+                            <strong>Accept</strong>: */*
+                          </div>
+                          
+                          <div>
+                            <strong>Connection</strong>: keep-alive
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1541850201.618009
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': '0940138003', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'a123456'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            200
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                            <div>
+                              <strong>Server</strong>: openresty/1.13.6.2
+                            </div>
+                            
+                            <div>
+                              <strong>Date</strong>: Sat, 10 Nov 2018 11:43:19 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Type</strong>: text/html
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Length</strong>: 991
+                            </div>
+                            
+                            <div>
+                              <strong>Connection</strong>: keep-alive
+                            </div>
+                            
+                            <div>
+                              <strong>Last-Modified</strong>: Fri, 03 Aug 2018 06:10:13 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>ETag</strong>: "5b63f1c5-3df"
+                            </div>
+                            
+                            <div>
+                              <strong>PICS-Label</strong>: (PICS-1.1 "http://www.ticrf.org.tw/ticrf/rating-selflabel.htm" l gen true for "http://www.8891.com.tw" r (s 0 l 0 v 0 o 0))
+                            </div>
+                            
+                            <div>
+                              <strong>Accept-Ranges</strong>: bytes
+                            </div>
+                            
+                            <div>
+                              <strong>X-Debug</strong>: api=3.7
+                            </div>
+                            
+                            <div>
+                              <strong>Strict-Transport-Security</strong>: max-age=31536000; includeSubDomains; preload
+                            </div>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            ISO-8859-1
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta content=&#34;NOINDEX, NOFOLLOW&#34; name=&#34;ROBOTS&#34; /&gt;
+&lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+&lt;title&gt;æ¨æå¨å°åå°æªéæ¾è¨ªå&lt;/title&gt;
+&lt;meta name=&#34;author&#34; content=&#34;æ¸å­ç§æè¡ä»½æéå¬å¸&#34; /&gt;
+&lt;meta name=&#34;copyright&#34; content=&#34;www.8891.com.tw&#34; /&gt;
+
+&lt;style type=&#34;text/css&#34;&gt; 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div id=&#34;wrapper&#34;&gt;
+    &lt;div id=&#34;mainview&#34;&gt;
+        &lt;img src=&#34;logo.png&#34;/&gt;
+    &lt;/div&gt;
+    &lt;h2&gt;éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                      <tr>
+                        <th>ok</th>
+                        <td>
+                          
+                            True
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>url</th>
+                        <td>
+                          
+                            https://www.8891.com.tw/errorpage/denylocation.html?api=3.7
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>reason</th>
+                        <td>
+                          
+                            OK
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>cookies</th>
+                        <td>
+                          
+                            {}
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>991</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2792.39</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>296.934</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_1">traceback</a>
+          <div id="popup_attachment_1_1" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_1">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+httprunner.exceptions.ValidationFailure: validate: headers.Content-Type equals application/json; charset=utf-8(str)	==> fail
+text/html(str) equals application/json; charset=utf-8(str)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 60, in test
+    self.fail(str(ex))
+AssertionError: validate: headers.Content-Type equals application/json; charset=utf-8(str)	==> fail
+text/html(str) equals application/json; charset=utf-8(str)
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_2">
+      <th class="failure" style="width:5em;">failure</td>
+      <td colspan="2">登錄-個人賣家登出</td>
+      <td style="text-align:center;width:6em;">930.8 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_2">log</a>
+        <div id="popup_log_1_2" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_2">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www.8891.com.tw/api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          GET
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>User-Agent</strong>: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                          </div>
+                          
+                          <div>
+                            <strong>Accept-Encoding</strong>: gzip, deflate
+                          </div>
+                          
+                          <div>
+                            <strong>Accept</strong>: */*
+                          </div>
+                          
+                          <div>
+                            <strong>Connection</strong>: keep-alive
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1541850204.414199
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'token': 'tkpbp904oumego4nnbjps31fk7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            200
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                            <div>
+                              <strong>Server</strong>: openresty/1.13.6.2
+                            </div>
+                            
+                            <div>
+                              <strong>Date</strong>: Sat, 10 Nov 2018 11:43:20 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Type</strong>: text/html
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Length</strong>: 991
+                            </div>
+                            
+                            <div>
+                              <strong>Connection</strong>: keep-alive
+                            </div>
+                            
+                            <div>
+                              <strong>Last-Modified</strong>: Fri, 03 Aug 2018 06:10:13 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>ETag</strong>: "5b63f1c5-3df"
+                            </div>
+                            
+                            <div>
+                              <strong>PICS-Label</strong>: (PICS-1.1 "http://www.ticrf.org.tw/ticrf/rating-selflabel.htm" l gen true for "http://www.8891.com.tw" r (s 0 l 0 v 0 o 0))
+                            </div>
+                            
+                            <div>
+                              <strong>Accept-Ranges</strong>: bytes
+                            </div>
+                            
+                            <div>
+                              <strong>X-Debug</strong>: api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                            </div>
+                            
+                            <div>
+                              <strong>Strict-Transport-Security</strong>: max-age=31536000; includeSubDomains; preload
+                            </div>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            ISO-8859-1
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta content=&#34;NOINDEX, NOFOLLOW&#34; name=&#34;ROBOTS&#34; /&gt;
+&lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+&lt;title&gt;æ¨æå¨å°åå°æªéæ¾è¨ªå&lt;/title&gt;
+&lt;meta name=&#34;author&#34; content=&#34;æ¸å­ç§æè¡ä»½æéå¬å¸&#34; /&gt;
+&lt;meta name=&#34;copyright&#34; content=&#34;www.8891.com.tw&#34; /&gt;
+
+&lt;style type=&#34;text/css&#34;&gt; 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div id=&#34;wrapper&#34;&gt;
+    &lt;div id=&#34;mainview&#34;&gt;
+        &lt;img src=&#34;logo.png&#34;/&gt;
+    &lt;/div&gt;
+    &lt;h2&gt;éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                      <tr>
+                        <th>ok</th>
+                        <td>
+                          
+                            True
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>url</th>
+                        <td>
+                          
+                            https://www.8891.com.tw/errorpage/denylocation.html?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>reason</th>
+                        <td>
+                          
+                            OK
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>cookies</th>
+                        <td>
+                          
+                            {}
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>991</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>930.8</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>309.291</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_2">traceback</a>
+          <div id="popup_attachment_1_2" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_2">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+httprunner.exceptions.ExtractFailure: Failed to extract attribute from response body! => content.status
+response body: <!DOCTYPE html>
+<html>
+<meta content="NOINDEX, NOFOLLOW" name="ROBOTS" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>æ¨æå¨å°åå°æªéæ¾è¨ªå</title>
+<meta name="author" content="æ¸å­ç§æè¡ä»½æéå¬å¸" />
+<meta name="copyright" content="www.8891.com.tw" />
+
+<style type="text/css"> 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+</style>
+
+<body>
+<div id="wrapper">
+    <div id="mainview">
+        <img src="logo.png"/>
+    </div>
+    <h2>éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã</h2>
+</div>
+</body>
+
+</html>
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 60, in test
+    self.fail(str(ex))
+AssertionError: Failed to extract attribute from response body! => content.status
+response body: <!DOCTYPE html>
+<html>
+<meta content="NOINDEX, NOFOLLOW" name="ROBOTS" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>æ¨æå¨å°åå°æªéæ¾è¨ªå</title>
+<meta name="author" content="æ¸å­ç§æè¡ä»½æéå¬å¸" />
+<meta name="copyright" content="www.8891.com.tw" />
+
+<style type="text/css"> 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+</style>
+
+<body>
+<div id="wrapper">
+    <div id="mainview">
+        <img src="logo.png"/>
+    </div>
+    <h2>éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã</h2>
+</div>
+</body>
+
+</html>
+
+
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+  </table>
+  
+  
+  <h3>登錄/登出</h3>
+  <table id="suite_2" class="details">
+    <tr>
+      <th>base_url</th>
+      <td colspan="2">https://www.8891.com.tw</td>
+      <th colspan="2" class="detail">
+        <a class="button" href="#suite_output_2">parameters & output</a>
+        <div id="suite_output_2" class="overlay">
+            <div class="popup">
+                <h2>Parameters and Output</h2>
+                <a class="close" href="#suite_2">&times;</a>
+                <div class="content">
+                  <div style="overflow: auto">
+                      <table>
+                        <tr>
+                          <th>variables</th>
+                          <th>output</th>
+                        </tr>
+                        
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL: 2</td>
+      <td>SUCCESS: 0</td>
+      <td>FAILED: 2</td>
+      <td>ERROR: 0</td>
+      <td>SKIPPED: 0</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th colspan="2">Name</th>
+      <th>Response Time</th>
+      <th>Detail</th>
+    </tr>
+
+    
+    
+    <tr id="record_2_1">
+      <th class="failure" style="width:5em;">failure</td>
+      <td colspan="2">登錄-買家登錄</td>
+      <td style="text-align:center;width:6em;">2133.51 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_2_1">log</a>
+        <div id="popup_log_2_1" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_2_1">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www.8891.com.tw/api/v3/u/login/?api=3.7
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>User-Agent</strong>: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                          </div>
+                          
+                          <div>
+                            <strong>Accept-Encoding</strong>: gzip, deflate
+                          </div>
+                          
+                          <div>
+                            <strong>Accept</strong>: */*
+                          </div>
+                          
+                          <div>
+                            <strong>Connection</strong>: keep-alive
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1541850205.3476539
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': '0940138004', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'a123456'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            200
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                            <div>
+                              <strong>Server</strong>: openresty/1.13.6.2
+                            </div>
+                            
+                            <div>
+                              <strong>Date</strong>: Sat, 10 Nov 2018 11:43:22 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Type</strong>: text/html
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Length</strong>: 991
+                            </div>
+                            
+                            <div>
+                              <strong>Connection</strong>: keep-alive
+                            </div>
+                            
+                            <div>
+                              <strong>Last-Modified</strong>: Fri, 03 Aug 2018 06:10:13 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>ETag</strong>: "5b63f1c5-3df"
+                            </div>
+                            
+                            <div>
+                              <strong>PICS-Label</strong>: (PICS-1.1 "http://www.ticrf.org.tw/ticrf/rating-selflabel.htm" l gen true for "http://www.8891.com.tw" r (s 0 l 0 v 0 o 0))
+                            </div>
+                            
+                            <div>
+                              <strong>Accept-Ranges</strong>: bytes
+                            </div>
+                            
+                            <div>
+                              <strong>X-Debug</strong>: api=3.7
+                            </div>
+                            
+                            <div>
+                              <strong>Strict-Transport-Security</strong>: max-age=31536000; includeSubDomains; preload
+                            </div>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            ISO-8859-1
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta content=&#34;NOINDEX, NOFOLLOW&#34; name=&#34;ROBOTS&#34; /&gt;
+&lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+&lt;title&gt;æ¨æå¨å°åå°æªéæ¾è¨ªå&lt;/title&gt;
+&lt;meta name=&#34;author&#34; content=&#34;æ¸å­ç§æè¡ä»½æéå¬å¸&#34; /&gt;
+&lt;meta name=&#34;copyright&#34; content=&#34;www.8891.com.tw&#34; /&gt;
+
+&lt;style type=&#34;text/css&#34;&gt; 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div id=&#34;wrapper&#34;&gt;
+    &lt;div id=&#34;mainview&#34;&gt;
+        &lt;img src=&#34;logo.png&#34;/&gt;
+    &lt;/div&gt;
+    &lt;h2&gt;éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                      <tr>
+                        <th>ok</th>
+                        <td>
+                          
+                            True
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>url</th>
+                        <td>
+                          
+                            https://www.8891.com.tw/errorpage/denylocation.html?api=3.7
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>reason</th>
+                        <td>
+                          
+                            OK
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>cookies</th>
+                        <td>
+                          
+                            {}
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>991</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2133.51</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>309.724</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_2_1">traceback</a>
+          <div id="popup_attachment_2_1" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_2_1">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+httprunner.exceptions.ValidationFailure: validate: headers.Content-Type equals application/json; charset=utf-8(str)	==> fail
+text/html(str) equals application/json; charset=utf-8(str)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 60, in test
+    self.fail(str(ex))
+AssertionError: validate: headers.Content-Type equals application/json; charset=utf-8(str)	==> fail
+text/html(str) equals application/json; charset=utf-8(str)
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_2_2">
+      <th class="failure" style="width:5em;">failure</td>
+      <td colspan="2">登錄-買家登出</td>
+      <td style="text-align:center;width:6em;">895.49 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_2_2">log</a>
+        <div id="popup_log_2_2" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_2_2">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www.8891.com.tw/api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          GET
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>User-Agent</strong>: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                          </div>
+                          
+                          <div>
+                            <strong>Accept-Encoding</strong>: gzip, deflate
+                          </div>
+                          
+                          <div>
+                            <strong>Accept</strong>: */*
+                          </div>
+                          
+                          <div>
+                            <strong>Connection</strong>: keep-alive
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1541850207.483524
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'token': 'tkpbp904oumego4nnbjps31fk7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            200
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                            <div>
+                              <strong>Server</strong>: openresty/1.13.6.2
+                            </div>
+                            
+                            <div>
+                              <strong>Date</strong>: Sat, 10 Nov 2018 11:43:23 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Type</strong>: text/html
+                            </div>
+                            
+                            <div>
+                              <strong>Content-Length</strong>: 991
+                            </div>
+                            
+                            <div>
+                              <strong>Connection</strong>: keep-alive
+                            </div>
+                            
+                            <div>
+                              <strong>Last-Modified</strong>: Fri, 03 Aug 2018 06:10:13 GMT
+                            </div>
+                            
+                            <div>
+                              <strong>ETag</strong>: "5b63f1c5-3df"
+                            </div>
+                            
+                            <div>
+                              <strong>PICS-Label</strong>: (PICS-1.1 "http://www.ticrf.org.tw/ticrf/rating-selflabel.htm" l gen true for "http://www.8891.com.tw" r (s 0 l 0 v 0 o 0))
+                            </div>
+                            
+                            <div>
+                              <strong>Accept-Ranges</strong>: bytes
+                            </div>
+                            
+                            <div>
+                              <strong>X-Debug</strong>: api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                            </div>
+                            
+                            <div>
+                              <strong>Strict-Transport-Security</strong>: max-age=31536000; includeSubDomains; preload
+                            </div>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            ISO-8859-1
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;meta content=&#34;NOINDEX, NOFOLLOW&#34; name=&#34;ROBOTS&#34; /&gt;
+&lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=utf-8&#34; /&gt;
+&lt;title&gt;æ¨æå¨å°åå°æªéæ¾è¨ªå&lt;/title&gt;
+&lt;meta name=&#34;author&#34; content=&#34;æ¸å­ç§æè¡ä»½æéå¬å¸&#34; /&gt;
+&lt;meta name=&#34;copyright&#34; content=&#34;www.8891.com.tw&#34; /&gt;
+
+&lt;style type=&#34;text/css&#34;&gt; 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div id=&#34;wrapper&#34;&gt;
+    &lt;div id=&#34;mainview&#34;&gt;
+        &lt;img src=&#34;logo.png&#34;/&gt;
+    &lt;/div&gt;
+    &lt;h2&gt;éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                      <tr>
+                        <th>ok</th>
+                        <td>
+                          
+                            True
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>url</th>
+                        <td>
+                          
+                            https://www.8891.com.tw/errorpage/denylocation.html?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>reason</th>
+                        <td>
+                          
+                            OK
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>cookies</th>
+                        <td>
+                          
+                            {}
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>991</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>895.49</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>292.864</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_2_2">traceback</a>
+          <div id="popup_attachment_2_2" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_2_2">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+httprunner.exceptions.ExtractFailure: Failed to extract attribute from response body! => content.status
+response body: <!DOCTYPE html>
+<html>
+<meta content="NOINDEX, NOFOLLOW" name="ROBOTS" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>æ¨æå¨å°åå°æªéæ¾è¨ªå</title>
+<meta name="author" content="æ¸å­ç§æè¡ä»½æéå¬å¸" />
+<meta name="copyright" content="www.8891.com.tw" />
+
+<style type="text/css"> 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+</style>
+
+<body>
+<div id="wrapper">
+    <div id="mainview">
+        <img src="logo.png"/>
+    </div>
+    <h2>éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã</h2>
+</div>
+</body>
+
+</html>
+
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 60, in test
+    self.fail(str(ex))
+AssertionError: Failed to extract attribute from response body! => content.status
+response body: <!DOCTYPE html>
+<html>
+<meta content="NOINDEX, NOFOLLOW" name="ROBOTS" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>æ¨æå¨å°åå°æªéæ¾è¨ªå</title>
+<meta name="author" content="æ¸å­ç§æè¡ä»½æéå¬å¸" />
+<meta name="copyright" content="www.8891.com.tw" />
+
+<style type="text/css"> 
+body { margin:0; padding:0; text-align:center; font-family: Verdana, Arial, Helvetica, sans-serif; }
+a, a:link, a:visited { color:#04D; }
+a:hover, a:active { color:#F50; }
+#wrapper { width:810px; margin:15% auto 0 auto; }
+#mainview { padding:0px 0 30px 0;}
+.msg { margin:0; padding:0 0 0 255px; line-height:2em; color:#666; font-size:12px; text-align:left; }
+.linkline { padding-top:10px; font-size:15px; }
+.linkline a { font-size:16px; }
+h2 {color: #666;}
+</style>
+
+<body>
+<div id="wrapper">
+    <div id="mainview">
+        <img src="logo.png"/>
+    </div>
+    <h2>éå¸¸æ±æ­ï¼ç¶²ç«æ«æªéæ¾æ¨æå¨å°åçè¨ªåã</h2>
+</div>
+</body>
+
+</html>
+
+
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+  </table>
+  
+</body>

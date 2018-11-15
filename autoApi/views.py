@@ -4,7 +4,8 @@ from httprunner import HttpRunner
 from django.http import HttpResponse
 from .models import CaseResult
 import datetime
-
+import json
+import collections
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ def index(request):
     # # 刪除
     # # caseResult.delete()
 
-    return HttpResponse("index page")
+    return render(request,"index.html")
 
 
 def runTestCase(request):
@@ -61,6 +62,13 @@ def runTestCase(request):
     )
     print(report)
     return HttpResponse("run test Case")
+
+def returnRate(request):
+    # d=collections.OrderedDict()
+    result=[{"id":1002011,"rate":99},{"id":1002012,"rate":90},{"id":1002013,"rate":96},{"id":1002014,"rate":88},{"id":1002015,"rate":70}]
+    return HttpResponse(json.dumps(result))
+
+
 
 
 if __name__ == '__main__':

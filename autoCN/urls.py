@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('runTestCase/',views.runTestCase),
+    path('returnRate/',views.returnRate),
 ]
