@@ -26,6 +26,7 @@ class CaseResult(models.Model):
     env = models.CharField('測試環境', max_length=30, null=True)
 
     def __str__(self):
+        # return self
         # <CaseResult:(id,success)>
         return "<Book:{id},{success}>".format(id=self.id, success=self.success)
 

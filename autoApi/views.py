@@ -6,6 +6,8 @@ from .models import CaseResult
 import datetime
 import json
 import collections
+import autoApi.autoUtil
+
 
 # Create your views here.
 
@@ -30,7 +32,7 @@ def index(request):
     # # 刪除
     # # caseResult.delete()
 
-    return render(request,"index.html")
+    return render(request, "index.html")
 
 
 def runTestCase(request):
@@ -61,14 +63,20 @@ def runTestCase(request):
         html_report_template="./templates/report_template.html"
     )
     print(report)
+    autoApi.autoUtil.send_mail_html(report)
     return HttpResponse("run test Case")
 
+
 def returnRate(request):
+    caseResult=CaseResult.objects.all()[0:5]
+    print(caseResult.id);
+    print(caseResult.stat_successes);
+    print(caseResult.stat_testsRun);
+
     # d=collections.OrderedDict()
-    result=[{"id":1002011,"rate":99},{"id":1002012,"rate":90},{"id":1002013,"rate":96},{"id":1002014,"rate":88},{"id":1002015,"rate":70}]
+    result = [{"id": 1002011, "rate": 99}, {"id": 1002012, "rate": 90}, {"id": 1002013, "rate": 96},
+              {"id": 1002014, "rate": 88}, {"id": 1002015, "rate": 70}]
     return HttpResponse(json.dumps(result))
-
-
 
 
 if __name__ == '__main__':
