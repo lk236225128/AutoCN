@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}autoCN自动化接口平台-首頁{% endblock %}
+{% load staticfiles %}
+{% block content %}
+    <h1 class="page-header">中古车看板</h1>
+    <div class="text-right" style="height: auto; width: auto">
+        <button type="button" class="btn btn-primary">失败原因汇总数据</button>
+        <button type="button" class="btn btn-success">获取最新数据</button>
+        {#        <button type="button" class="btn btn-info">执行测试</button>#}
+        <button type="button" class="btn btn-info" onclick="location='/runCase/'">执行测试</button>
+    </div>
+
+    <div class="row" id="tab1" style="height: auto; width: auto">
+
+        <div style="height: 410px;min-height: 100px;width:50%;margin: 0 auto" id="mychartmain" class="col-md-6">
+            <script type="text/javascript">
+                var mychart = echarts.init(document.getElementById("mychartmain"))
+                option = {
+                    title: {
+                        text: '某站点用户访问来源',
+                        subtext: '纯属虚构',
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'left',
+                        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {
+                                show: true,
+                                type: ['pie', 'funnel'],
+                                option: {
+                                    funnel: {
+                                        x: '25%',
+                                        width: '50%',
+                                        funnelAlign: 'left',
+                                        max: 1548
+                                    }
+                                }
+                            },
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    calculable: true,
+                    series: [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['50%', '60%'],
+                            data: [
+                                {value: 335, name: '直接访问'},
+                                {value: 310, name: '邮件营销'},
+                                {value: 234, name: '联盟广告'},
+                                {value: 135, name: '视频广告'},
+                                {value: 1548, name: '搜索引擎'}
+                            ]
+                        }
+                    ]
+                };
+                mychart.showLoading();
+                var reasonresult = [];
+                $.ajax({
+                    type: "get",
+                    async: true,
+                    url: "/failReport/",
+                    data: {},
+                    dataType: "json",
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+                            for (var i = 0; i < result.length; i++) {
+                                reasonresult.push({name: result[i].notesCategory, value: result[i].resultNum});
+                            }
+                            mychart.hideLoading();
+                            mychart.setOption({
+                                series: [{
+                                    name: '通过率',
+                                    data: reasonresult,
+                                    type: 'pie',
+                                    radius: '55%',
+                                    areaStyle: {},
+                                    center: ['50%', '60%'],
+                                }],
+
+                            })
+                        }
+
+                    }
+                })
+
+                mychart.setOption(option);
+            </script>
+        </div>
+
+
+    </div>
+    <hr>
+
+{% endblock %}

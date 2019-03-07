@@ -1,0 +1,339 @@
+-   config:
+        name: 物件詳情頁
+        request:
+            base_url: $base_url
+            headers:
+                User-Agent: car8891/3.1.2 (iPhone; iOS 11.4; Scale/3.00)
+                Cookie: $task
+        variables: []
+-   test:
+        name: 詳情頁-買家登錄
+        request:
+            data:
+                account: 0940138004
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.data.m_role
+            - '買家'
+        -   ne:
+            - content.token
+            - ''
+        extract:
+        -   buyertoken: content.token
+-   test:
+        name: 詳情頁-嚴選物件詳情頁-新
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                id: '1968835'
+            url: /api/v3/NewAuto/detail/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.message
+            - success
+        -   eq:
+            - content.data.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.is_topdealer_user
+            - '1'
+        -   eq:
+            - content.data.original.price
+            - '880000'
+        -   eq:
+            - content.data.original.region
+            - '20'
+        -   eq:
+            - content.data.original.brand_id
+            - '27'
+        -   eq:
+            - content.data.original.kind_id
+            - '8993'
+        -   eq:
+            - content.data.original.model_id
+            - '12253'
+        -   eq:
+            - content.data.original.alias
+            - 'CLA200'
+        -   eq:
+            - content.data.original.region_id
+            - '20'
+        -   eq:
+            - content.data.original.make_year
+            - '2018'
+        -   eq:
+            - content.data.original.year_type
+            - '2018'
+        -   eq:
+            - content.data.original.gas
+            - '2000'
+        -   eq:
+            - content.data.original.tab
+            - '2'
+        -   eq:
+            - content.data.original.door
+            - '2'
+        -   eq:
+            - content.data.original.driver
+            - '4'
+        -   eq:
+            - content.data.original.fuel
+            - '0'
+        -   eq:
+            - content.data.original.chair
+            - '5'
+        -   eq:
+            - content.data.original.license_expire_date
+            - '201702'
+        -   eq:
+            - content.data.original.mile
+            - '100000'
+        -   eq:
+            - content.data.original.is_top
+            - '0'
+        -   eq:
+            - content.data.original.is_check
+            - '0'
+        -   eq:
+            - content.data.original.is_audit
+            - '0'
+        -   eq:
+            - content.data.original.is_report
+            - '0'
+        -   eq:
+            - content.data.original.is_auction
+            - '0'
+        -   eq:
+            - content.data.lowPrice.is_normal_price
+            - '1'
+        -   eq:
+            - content.data.lowPrice.low_price_warn
+            - ''
+        -   eq:
+            - content.data.lowPrice.low_price_reason_first
+            - ''
+        -   eq:
+            - content.data.itemInfo.title
+            - '8891自動化測試，勿刪'
+        -   eq:
+            - content.data.itemInfo.price
+            - '88.0萬'
+        -   eq:
+            - content.data.itemInfo.region
+            - '宜蘭縣'
+        -   eq:
+            - content.data.itemInfo.status
+            - '0'
+        -   eq:
+            - content.data.itemInfo.brand
+            - '賓士'
+        -   eq:
+            - content.data.itemInfo.brand_en
+            - 'Mercedes-Benz'
+        -   eq:
+            - content.data.itemInfo.kind
+            - 'CLA'
+        -   eq:
+            - content.data.itemInfo.model
+            - 'CLA200'
+        -   eq:
+            - content.data.itemInfo.gas
+            - '2.0L'
+        -   eq:
+            - content.data.itemInfo.mile
+            - '10.0萬公里'
+        -   eq:
+            - content.data.itemInfo.tab
+            - '自手排'
+        -   eq:
+            - content.data.itemInfo.year_type
+            - '2018款'
+
+-   test:
+        name: 詳情頁-安全驗證
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                iid: '1932157'
+            url: /api/v3/fraud/security
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - '200'
+-   test:
+        name: 詳情頁-猜你喜歡列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                bid: '15'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                iid: '1932157'
+                kid: '9857'
+                limit: '4'
+                sid: '4034'
+            url: /api/v3/NewAutos/recommendList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.message
+            - success
+-   test:
+        name: 詳情頁-三大保障
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                id: '1932157'
+                tag[]: is_real_protection
+                topdealer: '1'
+            url: /api/v3/NewAuto/description/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.message
+            - success
+-   test:
+        name: 詳情頁-物件詳情頁-舊
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                id: '1932157'
+            url: /api/v3/auto/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.lng
+            - '120.59606110478512'
+        -   eq:
+            - content.lat
+            - '24.11195891853205'
+-   test:
+        name: 詳情頁-獲取預約看車信息v3.7
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                item_id: '1942725'
+                token: $buyertoken
+            url: /api/v3/appoint/index
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+-   test:
+        name: 詳情頁-訪問檢舉頁
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                item_id: '1942725'
+                token: $buyertoken
+            url: /api/v3/report/check/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+-   test:
+        name: 詳情頁-車行詳情頁
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                shop_id: '1074'
+            url: /api/v3/shops/detail/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+-   test:
+        name: 詳情頁-買家登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $buyertoken
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK

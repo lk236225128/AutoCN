@@ -1,0 +1,199 @@
+-   config:
+        name: APP首頁
+        request:
+            base_url: 'https://www.8891.com.tw'
+            headers:
+                User-Agent: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+        variables: []
+-   test:
+        name: 首頁-嚴選物件
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                filter: topdealer
+            url: /api/v3/Home/autos
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - content.message
+            - success
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.data.0.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.1.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.2.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.3.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.4.is_topdealer
+            - '1'
+        -   eq:
+            - content.data.5.is_topdealer
+            - '1'
+
+-   test:
+        name: 首頁-最近物件
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                filter: recently
+            url: /api/v3/Home/autos
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.message
+            - success
+        -   eq:
+            - content.status
+            - '200'
+        -   ne:
+            - content.data.0.id
+            - ''
+        -   ne:
+            - content.data.1.id
+            - ''
+        -   ne:
+            - content.data.2.id
+            - ''
+        -   ne:
+            - content.data.3.id
+            - ''
+-   test:
+        name: 首頁-熱門廠牌
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+            url: /api/v3/Home/hot
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.message
+            - success
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.data.price.0.name
+            - '25萬以下'
+        -   eq:
+            - content.data.price.0.fields.0.value
+            - '0'
+        -   eq:
+            - content.data.price.0.fields.1.value
+            - '25'
+        -   eq:
+            - content.data.brand.0.fields.0.field
+            - 'bid'
+        -   ne:
+            - content.data.brand.0.fields.0.value
+            - ''
+-   test:
+        name: 首頁-獲取快報
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+            url: /api/v3/Bulletin/get
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - '200'
+        -   ne:
+            - content.data.list.0.url
+            - ''
+
+-   test:
+        name: 首頁-附近車行
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                lat: '22.573797'
+                lng: '114.056458'
+                m: nearby
+            url: /api/v3/Home/shops/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.message
+            - success
+        -   eq:
+            - content.status
+            - '200'
+        -   eq:
+            - content.data.city
+            - '台北市'
+        -   ne:
+            - content.data.shops.0.id
+            - ''
+        -   ne:
+            - content.data.shops.1.id
+            - ''
+        -   ne:
+            - content.data.shops.2.id
+            - ''
+-   test:
+        name: 首頁-分析接口
+        request:
+            data:
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                m: 2CD20222-250E-4F06-8CD7-0F1AAD338AF1
+                s: '1'
+                t: <07b9a667 c23193a6 64a2ece1 cb87d3c9 f3f1ca67 fae2098a 79e3b316
+                    3f235dec>
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                action: push
+                api: '3.7'
+            url: /api/v3/analysis/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - showye2

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}autoCN自动化接口平台-用例编辑{% endblock %}
+{% load staticfiles %}
+{% block menu %}
+    <li><a href="/">首页</a></li>
+    <li><a href="/dashboard/usedCar">看板<span class="sr-only">(current)</span></a></li>
+    <li><a href="/runCase/{{ department }}">执行测试</a></li>
+    <li><a href="/failReason/usedCar">失败分析</a></li>
+    <li><a href="/caseList/">用例列表</a></li>
+    <li class="active"><a href="/articleList/">文章列表</a></li>
+{% endblock %}
+{% block content %}
+    <div class="container text-center">
+        <h2 class="form-signin-heading">{{ article.articleName }}</h2>
+
+        作者:{{ article.author }}<br>
+        {{ article.addtime }}<br>
+        <br>
+    </div> <!-- /container -->
+<div class="container" style="width: auto;height: auto">
+       {{ article.aritcleContent|safe }}
+    </div>
+
+
+
+{% endblock %}

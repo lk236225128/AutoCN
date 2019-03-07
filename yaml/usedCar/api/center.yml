@@ -1,0 +1,1029 @@
+-   config:
+        name: 會員中心
+        request:
+            base_url: $base_url
+            headers:
+                User-Agent: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                Cookie: $task
+        variables: []
+-   test:
+        name: 會員中心-未登錄
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: ''
+            url: /api/v3/u/center/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.error.message
+            - '請先登入帳號！'
+-   test:
+        name: 會員中心-獲取公告
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+            url: /api/v3/home/getNotice/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   ne:
+            - content.data.0.title
+            - ''
+-   test:
+        name: 會員中心-買家登錄
+        request:
+            data:
+                account: 0940138004
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   ne:
+            - content.token
+            - ''
+        -   eq:
+            - content.data.m_role
+            - '買家'
+        extract:
+        -   buyertoken: content.token
+-   test:
+        name: 會員中心-獲取買家信息
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $buyertoken
+            url: /api/v3/u/center/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.data.m_role
+            - '買家'
+        -   eq:
+            - content.data.sale_data.open
+            - 0
+        -   eq:
+            - content.option.field.0.0
+            - 'post_item'
+        -   eq:
+            - content.option.field.0.1
+            - 'top_promotion'
+        -   eq:
+            - content.option.field.1.0
+            - 'online_contact'
+        -   eq:
+            - content.option.field.1.1
+            - 'collection'
+        -   eq:
+            - content.option.field.1.2
+            - 'history'
+        -   eq:
+            - content.option.field.1.3
+            - 'my_appoint'
+        -   eq:
+            - content.option.field.1.4
+            - 'my_report'
+        -   eq:
+            - content.option.field.1.5
+            - 'fcar_topic'
+        -   eq:
+            - content.option.field.2.0
+            - 'more'
+        -   eq:
+            - content.option.data.post_item.title
+            - '刊登物件'
+        -   eq:
+            - content.option.data.top_promotion.title
+            - '物件置頂推廣'
+        -   eq:
+            - content.option.data.appoint_manage.title
+            - '預約管理'
+        -   eq:
+            - content.option.data.appoint_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.report_manage.title
+            - '檢舉管理'
+        -   eq:
+            - content.option.data.report_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_appoint.title
+            - '我的預約'
+        -   eq:
+            - content.option.data.my_appoint.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_report.title
+            - '我的檢舉'
+        -   eq:
+            - content.option.data.my_report.is_open
+            - 1
+        -   eq:
+            - content.option.data.authenticate.title
+            - '身份認證'
+        -   eq:
+            - content.option.data.authenticate.is_open
+            - 1
+-   test:
+        name: 會員中心-買家-預約中
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '1'
+                skip: '0'
+                token: $buyertoken
+                type: '1'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-買家-成功預約
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '1'
+                skip: '0'
+                token: $buyertoken
+                type: '2'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-買家-預約歷史
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '1'
+                skip: '0'
+                token: $buyertoken
+                type: '3'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.total
+            - '0'
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-買家-我的檢舉
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '1'
+                skip: '0'
+                token: $buyertoken
+            url: /api/v3/report/getReportList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-買家登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $buyertoken
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK
+-   test:
+        name: 會員中心-賣家登錄
+        request:
+            data:
+                account: 0940138003
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   ne:
+            - content.token
+            - ''
+        -   eq:
+            - content.data.m_role
+            - '個人'
+        extract:
+        -   salertoken: content.token
+-   test:
+        name: 會員中心-獲取賣家信息
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $salertoken
+            url: /api/v3/u/center/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.data.m_role
+            - '個人'
+        -   eq:
+            - content.option.field.0.0
+            - 'post_item'
+        -   eq:
+            - content.option.field.0.1
+            - 'top_promotion'
+        -   eq:
+            - content.option.field.1.0
+            - 'online_contact'
+        -   eq:
+            - content.option.field.1.1
+            - 'collection'
+        -   eq:
+            - content.option.field.1.2
+            - 'history'
+        -   eq:
+            - content.option.field.1.3
+            - 'fcar_topic'
+        -   eq:
+            - content.option.field.2.0
+            - 'authenticate'
+        -   eq:
+            - content.option.field.2.1
+            - 'more'
+        -   eq:
+            - content.option.data.post_item.title
+            - '刊登物件'
+        -   eq:
+            - content.option.data.post_item.is_open
+            - 1
+        -   eq:
+            - content.option.data.top_promotion.title
+            - '物件置頂推廣'
+        -   eq:
+            - content.option.data.top_promotion.is_open
+            - 1
+        -   eq:
+            - content.option.data.appoint_manage.title
+            - '預約管理'
+        -   eq:
+            - content.option.data.appoint_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.report_manage.title
+            - '檢舉管理'
+        -   eq:
+            - content.option.data.report_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_appoint.title
+            - '我的預約'
+        -   eq:
+            - content.option.data.my_appoint.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_report.title
+            - '我的檢舉'
+        -   eq:
+            - content.option.data.my_report.is_open
+            - 1
+        -   eq:
+            - content.option.data.authenticate.title
+            - '身份認證'
+        -   eq:
+            - content.option.data.authenticate.is_open
+            - 1
+-   test:
+        name: 會員中心-賣家登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $salertoken
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK
+-   test:
+        name: 會員中心-商家登錄
+        request:
+            data:
+                account: majia
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        extract:
+        -   businesstoken: content.token
+-   test:
+        name: 會員中心-獲取商家信息
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $businesstoken
+            url: /api/v3/u/center/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.data.m_role
+            - '商家'
+        -   eq:
+            - content.option.field.0.0
+            - 'post_item'
+        -   eq:
+            - content.option.field.0.1
+            - 'top_promotion'
+        -   eq:
+            - content.option.field.1.0
+            - 'online_contact'
+        -   eq:
+            - content.option.field.1.1
+            - 'collection'
+        -   eq:
+            - content.option.field.1.2
+            - 'history'
+        -   eq:
+            - content.option.field.1.3
+            - 'fcar_topic'
+        -   eq:
+            - content.option.field.2.0
+            - 'authenticate'
+        -   eq:
+            - content.option.field.2.1
+            - 'more'
+        -   eq:
+            - content.option.data.post_item.title
+            - '刊登物件'
+        -   eq:
+            - content.option.data.post_item.is_open
+            - 1
+        -   eq:
+            - content.option.data.top_promotion.title
+            - '物件置頂推廣'
+        -   eq:
+            - content.option.data.top_promotion.is_open
+            - 1
+        -   eq:
+            - content.option.data.appoint_manage.title
+            - '預約管理'
+        -   eq:
+            - content.option.data.appoint_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.report_manage.title
+            - '檢舉管理'
+        -   eq:
+            - content.option.data.report_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_appoint.title
+            - '我的預約'
+        -   eq:
+            - content.option.data.my_appoint.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_report.title
+            - '我的檢舉'
+        -   eq:
+            - content.option.data.my_report.is_open
+            - 1
+        -   eq:
+            - content.option.data.authenticate.title
+            - '身份認證'
+        -   eq:
+            - content.option.data.authenticate.is_open
+            - 1
+-   test:
+        name: 會員中心-商家登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $businesstoken
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK
+-   test:
+        name: 會員中心-嚴選商家登錄
+        request:
+            data:
+                account: 0940138000
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   ne:
+            - content.token
+            - ''
+        -   eq:
+            - content.data.m_role
+            - '商家'
+        extract:
+        -   topdealertoken: content.token
+-   test:
+        name: 會員中心-獲取嚴選商家信息
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $topdealertoken
+            url: /api/v3/u/center/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.data.m_role
+            - '商家'
+        -   eq:
+            - content.option.field.0.0
+            - 'post_item'
+        -   eq:
+            - content.option.field.0.1
+            - 'top_promotion'
+        -   eq:
+            - content.option.field.1.0
+            - 'online_contact'
+        -   eq:
+            - content.option.field.1.1
+            - 'collection'
+        -   eq:
+            - content.option.field.1.2
+            - 'history'
+        -   eq:
+            - content.option.field.1.3
+            - 'appoint_manage'
+        -   eq:
+            - content.option.field.1.4
+            - 'report_manage'
+        -   eq:
+            - content.option.field.1.5
+            - 'fcar_topic'
+        -   eq:
+            - content.option.field.2.0
+            - 'authenticate'
+        -   eq:
+            - content.option.field.2.1
+            - 'more'
+        -   eq:
+            - content.option.data.post_item.title
+            - '刊登物件'
+        -   eq:
+            - content.option.data.post_item.is_open
+            - 1
+        -   eq:
+            - content.option.data.top_promotion.title
+            - '物件置頂推廣'
+        -   eq:
+            - content.option.data.top_promotion.is_open
+            - 1
+        -   eq:
+            - content.option.data.appoint_manage.title
+            - '預約管理'
+        -   eq:
+            - content.option.data.appoint_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.report_manage.title
+            - '檢舉管理'
+        -   eq:
+            - content.option.data.report_manage.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_appoint.title
+            - '我的預約'
+        -   eq:
+            - content.option.data.my_appoint.is_open
+            - 1
+        -   eq:
+            - content.option.data.my_report.title
+            - '我的檢舉'
+        -   eq:
+            - content.option.data.my_report.is_open
+            - 1
+        -   eq:
+            - content.option.data.authenticate.title
+            - '身份認證'
+        -   eq:
+            - content.option.data.authenticate.is_open
+            - 1
+-   test:
+        name: 會員中心-出售中列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                status: open
+                token: $topdealertoken
+            url: /api/v3/u/auto/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - open
+
+-   test:
+        name: 會員中心-待出售列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                status: unsale
+                token: $topdealertoken
+            url: /api/v3/u/auto/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - unsale
+
+-   test:
+        name: 會員中心-已成交列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                status: deal
+                token: $topdealertoken
+            url: /api/v3/u/auto/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - deal
+
+-   test:
+        name: 會員中心-未通過審覈列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                status: unpass
+                token: $topdealertoken
+            url: /api/v3/u/auto/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - unpass
+
+-   test:
+        name: 會員中心-檢舉管理
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '2'
+                skip: '0'
+                token: $topdealertoken
+            url: /api/v3/report/getReportList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-預約管理-待處理
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '2'
+                skip: '0'
+                token: $topdealertoken
+                type: '1'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-預約管理-成功預約
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '2'
+                skip: '0'
+                token: $topdealertoken
+                type: '2'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-預約管理-預約歷史
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                limit: '10'
+                role: '2'
+                skip: '0'
+                token: $topdealertoken
+                type: '3'
+            url: /api/v3/appoint/getAppointList
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - ok
+
+-   test:
+        name: 會員中心-獲取收藏列表
+        request:
+            data:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $topdealertoken
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/favorite/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+-   test:
+        name: 會員中心-刪除單個收藏
+        request:
+            data:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                id[]: ''
+                token: $topdealertoken
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                action: del
+                api: '3.7'
+            url: https://www.8891.com.tw/api/v3/u/favorite/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+-   test:
+        name: 會員中心-刪除全部收藏
+        request:
+            data:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $topdealertoken
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                action: del_all
+                api: '3.7'
+            url: https://www.8891.com.tw/api/v3/u/favorite/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+-   test:
+        name: 會員中心-更多-廣告列表
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+            url: /api/v3/app/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.apps.0.app_name
+            - '8891汽車交易'
+        -   eq:
+            - content.apps.1.app_name
+            - '8891新車'
+        -   eq:
+            - content.apps.2.app_name
+            - '8591寶物交易'
+        -   eq:
+            - content.apps.3.app_name
+            - '591房屋交易'
+        -   eq:
+            - content.apps.4.app_name
+            - '518找工作'
+        -   eq:
+            - content.apps.5.app_name
+            - '518找人才'
+        -   eq:
+            - content.apps.6.app_name
+            - '101原創T恤'
+-   test:
+        name: 會員中心-更多-提交意見反饋-合法數據
+        request:
+            data:
+                agree: '1'
+                api: '3.7'
+                comments: ''
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                email: 0940-138-000
+                sysInfo: uniqueIdentifier:1c3ce9d767daa9517d2fda51f4866b311399c9be|systemName:iOS|systemVersion:11.4|model:iPhone|localizedModel:iPhone|3.1.1
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/feedback/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK
+-   test:
+        name: 會員中心-更多-提交意見反饋-內容為空
+        request:
+            data:
+                agree: '0'
+                api: '3.7'
+                comments: ''
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                email: 0940-138-000
+                sysInfo: uniqueIdentifier:1c3ce9d767daa9517d2fda51f4866b311399c9be|systemName:iOS|systemVersion:11.4|model:iPhone|localizedModel:iPhone|3.1.1
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/feedback/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.error.message
+            - '請填寫所有選項！'
+
+-   test:
+        name: 會員中心-更多-提交意見反饋-未同意條款
+        request:
+            data:
+                agree: '0'
+                api: '3.7'
+                comments: 8891測試
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                email: 0940-138-000
+                sysInfo: uniqueIdentifier:1c3ce9d767daa9517d2fda51f4866b311399c9be|systemName:iOS|systemVersion:11.4|model:iPhone|localizedModel:iPhone|3.1.1
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/feedback/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.error.message
+            - '送出失敗，請閱讀並同意條款！'
+
+-   test:
+        name: 會員中心-嚴選商家登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: $topdealertoken
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK

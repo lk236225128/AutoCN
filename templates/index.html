@@ -1,483 +1,203 @@
-{% extends 'base.html' %}
-{% block title %}autoCN自动化接口平台-首頁{% endblock %}
-{% load staticfiles %}
-{% block content %}
-    <h1 class="page-header">Dashboard</h1>
-    <div class="text-right" style="height: auto; width: auto">
-        <button type="button" class="btn btn-primary">失败原因汇总数据</button>
-        <button type="button" class="btn btn-success">获取最新数据</button>
-        <button type="button" class="btn btn-info">（一般信息）Info</button>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Carousel Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/static/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/static/js/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/jquery.min.js"><\/script>')</script>
+    <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/carousel.css" rel="stylesheet">
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">autoCN</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">首页</a></li>
+                        <li><a href="dashboard/">数据看板</a></li>
+                        <li><a href="failReason/">结果分析</a></li>
+                        <li><a href="#contact">关于我们</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
     </div>
-
-    <div class="row" id="tab1"  style="height: auto; width: auto">
-
-        <div style="height: 410px;min-height: 100px;width:50%;margin: 0 auto" id="mychartmain" class="col-md-6">
-            <script type="text/javascript">
-                var mychart = echarts.init(document.getElementById("mychartmain"))
-                option = {
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [{
-                        data: [820, 932, 901, 934, 1290, 1330, 1320],
-                        type: 'line',
-                        areaStyle: {}
-                    }]
-                };
-                mychart.showLoading();
-                var rate = [];
-                var id = []
-                $.ajax({
-                    type: "get",
-                    async: true,
-                    url: "/returnRate/",
-                    data: {},
-                    dataType: "json",
-                    success: function (result) {
-                        if (result != null && result.length > 0) {
-                            for (var i = 0; i < result.length; i++) {
-                                rate.push(result[i].rate);
-                                id.push(result[i].id);
-                            }
-                            mychart.hideLoading();
-                            mychart.setOption({
-                                title: {
-                                    text: '接口测试通过率'
-                                },
-                                legend: {
-                                    data: ['通过率']
-                                },
-                                xAxis: {
-                                    data: id
-                                },
-                                yAxis: [
-                                    {
-                                        type: 'value',
-                                        axisLabel: {
-                                            show: true,
-                                            interval: 'auto',
-                                            formatter: '{value} %'
-                                        },
-                                        show: true
-                                    }
-                                ],
-                                series: [{
-                                    name: '通过率',
-                                    data: rate,
-                                    type: 'line',
-                                    color: '#8cd5a9',
-                                    areaStyle: {},
-                                }],
-                                dataZoom: [
-                                    {   // 这个dataZoom组件，默认控制x轴。
-                                        type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-                                        start: 0,      // 左边在 10% 的位置。
-                                        end: 100         // 右边在 60% 的位置。
-                                    }
-                                ],
-                                label: {
-                                    show: true,
-                                    interval: 'auto',
-                                    rotate: 0,
-                                    formatter: '{c} %',
-                                    textStyle: {
-                                        color: '#333'
-                                    }
-                                },
-                                toolbox: {
-                                    show: true,
-                                    orient: 'horizontal',
-                                    feature: {
-                                        dataZoom: {
-                                            yAxisIndex: 'none'
-                                        },
-                                        magicType: {type: ['line', 'bar']},
-                                        restore: {},
-                                        saveAsImage: {}
-                                    }
-                                },
-
-                            })
-                        }
-
-                    }
-                })
+</div>
 
 
-                mychart.setOption(option);
-            </script>
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="/static/img/BannerFinal.gif" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption left">
+                    <h1></h1>
+
+                </div>
+            </div>
         </div>
 
+    </div><!-- /.carousel -->
 
-        <div class="table-responsive col-md-6" style="height: 410px;min-height: 100px;width:50%;margin: 0 auto">
-            {#                <h2 class="sub-header" style="width:50%;margin: 0 auto" >Section title</h2>#}
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>CI ID</th>
-                    <th>测试执行时间</th>
-                    <th>通过率</th>
-                    <th>报告详情</th>
-                    <th>失败原因</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1,001</td>
-                    <td>Lorem</td>
-                    <td>ipsum</td>
-                    <td>dolor</td>
-                    <td>sit</td>
-                </tr>
-                <tr>
-                    <td>1,002</td>
-                    <td>amet</td>
-                    <td>consectetur</td>
-                    <td>adipiscing</td>
-                    <td>elit</td>
-                </tr>
-                <tr>
-                    <td>1,003</td>
-                    <td>Integer</td>
-                    <td>nec</td>
-                    <td>odio</td>
-                    <td>Praesent</td>
-                </tr>
-                <tr>
-                    <td>1,003</td>
-                    <td>libero</td>
-                    <td>Sed</td>
-                    <td>cursus</td>
-                    <td>ante</td>
-                </tr>
-                <tr>
-                    <td>1,004</td>
-                    <td>dapibus</td>
-                    <td>diam</td>
-                    <td>Sed</td>
-                    <td>nisi</td>
-                </tr>
-                <tr>
-                    <td>1,005</td>
-                    <td>Nulla</td>
-                    <td>quis</td>
-                    <td>sem</td>
-                    <td>at</td>
-                </tr>
-                <tr>
-                    <td>1,006</td>
-                    <td>nibh</td>
-                    <td>elementum</td>
-                    <td>imperdiet</td>
-                    <td>Duis</td>
-                </tr>
-                <tr>
-                    <td>1,007</td>
-                    <td>sagittis</td>
-                    <td>ipsum</td>
-                    <td>Praesent</td>
-                    <td>mauris</td>
-                </tr>
-                <tr>
-                    <td>1,008</td>
-                    <td>Fusce</td>
-                    <td>nec</td>
-                    <td>tellus</td>
-                    <td>sed</td>
-                </tr>
-                <tr>
-                    <td>1,009</td>
-                    <td>augue</td>
-                    <td>semper</td>
-                    <td>porta</td>
-                    <td>Mauris</td>
-                </tr>
-                <tr>
-                    <td>1,010</td>
-                    <td>massa</td>
-                    <td>Vestibulum</td>
-                    <td>lacinia</td>
-                    <td>arcu</td>
-                </tr>
-                <tr>
-                    <td>1,011</td>
-                    <td>eget</td>
-                    <td>nulla</td>
-                    <td>Class</td>
-                    <td>aptent</td>
-                </tr>
-                <tr>
-                    <td>1,012</td>
-                    <td>taciti</td>
-                    <td>sociosqu</td>
-                    <td>ad</td>
-                    <td>litora</td>
-                </tr>
-                <tr>
-                    <td>1,013</td>
-                    <td>torquent</td>
-                    <td>per</td>
-                    <td>conubia</td>
-                    <td>nostra</td>
-                </tr>
-                <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                    <td>himenaeos</td>
-                    <td>Curabitur</td>
-                </tr>
-                <tr>
-                    <td>1,015</td>
-                    <td>sodales</td>
-                    <td>ligula</td>
-                    <td>in</td>
-                    <td>libero</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
     <hr>
+    <div class="container marketing">
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="img-circle"
+                     src="/static/img/icon12.gif"
+                     alt="Generic placeholder image" width="140" height="140">
+                <h2>功能模块</h2>
+                <span width="50px">
+                    <p>1.<a href="/runPage/">用例执行</a></p>
+                    <p>2.<a href="/xadmin/">后台管理</a></p>
+                    <p>3.<a href="/dashboard/">DashBoard</a></p>
+                    <p>.</p>
 
-{#    <div class="row" id="tab2">#}
-{##}
-{#        <div style="height: 410px;min-height: 100px;width:50%;margin: 0 auto" id="mychartmain2"#}
-{#             class="col-md-6">#}
-{#            <script type="text/javascript">#}
-{#                var mychart = echarts.init(document.getElementById("mychartmain2"))#}
-{#                option = {#}
-{#                    xAxis: {#}
-{#                        type: 'category',#}
-{#                        boundaryGap: false,#}
-{#                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']#}
-{#                    },#}
-{#                    yAxis: {#}
-{#                        type: 'value'#}
-{#                    },#}
-{#                    series: [{#}
-{#                        data: [820, 932, 901, 934, 1290, 1330, 1320],#}
-{#                        type: 'line',#}
-{#                        areaStyle: {}#}
-{#                    }]#}
-{#                };#}
-{#                mychart.showLoading();#}
-{#                var rate = [];#}
-{#                var id = []#}
-{#                $.ajax({#}
-{#                    type: "get",#}
-{#                    async: true,#}
-{#                    url: "/returnRate/",#}
-{#                    data: {},#}
-{#                    dataType: "json",#}
-{#                    success: function (result) {#}
-{#                        if (result != null && result.length > 0) {#}
-{#                            for (var i = 0; i < result.length; i++) {#}
-{#                                rate.push(result[i].rate);#}
-{#                                id.push(result[i].id);#}
-{#                            }#}
-{#                            mychart.hideLoading();#}
-{#                            mychart.setOption({#}
-{#                                title: {#}
-{#                                    text: '接口测试通过率'#}
-{#                                },#}
-{#                                legend: {#}
-{#                                    data: ['通过率']#}
-{#                                },#}
-{#                                xAxis: {#}
-{#                                    data: id#}
-{#                                },#}
-{#                                yAxis: [#}
-{#                                    {#}
-{#                                        type: 'value',#}
-{#                                        axisLabel: {#}
-{#                                            show: true,#}
-{#                                            interval: 'auto',#}
-{#                                            formatter: '{value} %'#}
-{#                                        },#}
-{#                                        show: true#}
-{#                                    }#}
-{#                                ],#}
-{#                                series: [{#}
-{#                                    name: '通过率',#}
-{#                                    data: rate,#}
-{#                                    type: 'line',#}
-{#                                    color: '#8cd5a9',#}
-{#                                    areaStyle: {},#}
-{#                                }],#}
-{#                                dataZoom: [#}
-{#                                    {   // 这个dataZoom组件，默认控制x轴。#}
-{#                                        type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件#}
-{#                                        start: 0,      // 左边在 10% 的位置。#}
-{#                                        end: 100         // 右边在 60% 的位置。#}
-{#                                    }#}
-{#                                ],#}
-{#                                label: {#}
-{#                                    show: true,#}
-{#                                    interval: 'auto',#}
-{#                                    rotate: 0,#}
-{#                                    formatter: '{c} %',#}
-{#                                    textStyle: {#}
-{#                                        color: '#333'#}
-{#                                    }#}
-{#                                },#}
-{#                                toolbox: {#}
-{#                                    show: true,#}
-{#                                    feature: {#}
-{#                                        dataZoom: {#}
-{#                                            yAxisIndex: 'none'#}
-{#                                        },#}
-{#                                        dataView: {readOnly: false},#}
-{#                                        magicType: {type: ['line', 'bar']},#}
-{#                                        restore: {},#}
-{#                                        saveAsImage: {}#}
-{#                                    }#}
-{#                                },#}
-{##}
-{#                            })#}
-{#                        }#}
-{##}
-{#                    }#}
-{#                })#}
-{##}
-{##}
-{#                mychart.setOption(option);#}
-{#            </script>#}
-{#        </div>#}
-{##}
-{##}
-{#        <div class="table-responsive col-md-6" style="height: 410px;min-height: 100px;width:50%;margin: 0 auto">#}
-            {#                <h2 class="sub-header" style="width:50%;margin: 0 auto" >Section title</h2>#}
-{#            <table class="table table-striped">#}
-{#                <thead>#}
-{#                <tr>#}
-{#                    <th>#</th>#}
-{#                    <th>Header</th>#}
-{#                    <th>Header</th>#}
-{#                    <th>Header</th>#}
-{#                    <th>Header</th>#}
-{#                </tr>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                <tr>#}
-{#                    <td>1,001</td>#}
-{#                    <td>Lorem</td>#}
-{#                    <td>ipsum</td>#}
-{#                    <td>dolor</td>#}
-{#                    <td>sit</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,002</td>#}
-{#                    <td>amet</td>#}
-{#                    <td>consectetur</td>#}
-{#                    <td>adipiscing</td>#}
-{#                    <td>elit</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,003</td>#}
-{#                    <td>Integer</td>#}
-{#                    <td>nec</td>#}
-{#                    <td>odio</td>#}
-{#                    <td>Praesent</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,003</td>#}
-{#                    <td>libero</td>#}
-{#                    <td>Sed</td>#}
-{#                    <td>cursus</td>#}
-{#                    <td>ante</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,004</td>#}
-{#                    <td>dapibus</td>#}
-{#                    <td>diam</td>#}
-{#                    <td>Sed</td>#}
-{#                    <td>nisi</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,005</td>#}
-{#                    <td>Nulla</td>#}
-{#                    <td>quis</td>#}
-{#                    <td>sem</td>#}
-{#                    <td>at</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,006</td>#}
-{#                    <td>nibh</td>#}
-{#                    <td>elementum</td>#}
-{#                    <td>imperdiet</td>#}
-{#                    <td>Duis</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,007</td>#}
-{#                    <td>sagittis</td>#}
-{#                    <td>ipsum</td>#}
-{#                    <td>Praesent</td>#}
-{#                    <td>mauris</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,008</td>#}
-{#                    <td>Fusce</td>#}
-{#                    <td>nec</td>#}
-{#                    <td>tellus</td>#}
-{#                    <td>sed</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,009</td>#}
-{#                    <td>augue</td>#}
-{#                    <td>semper</td>#}
-{#                    <td>porta</td>#}
-{#                    <td>Mauris</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,010</td>#}
-{#                    <td>massa</td>#}
-{#                    <td>Vestibulum</td>#}
-{#                    <td>lacinia</td>#}
-{#                    <td>arcu</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,011</td>#}
-{#                    <td>eget</td>#}
-{#                    <td>nulla</td>#}
-{#                    <td>Class</td>#}
-{#                    <td>aptent</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,012</td>#}
-{#                    <td>taciti</td>#}
-{#                    <td>sociosqu</td>#}
-{#                    <td>ad</td>#}
-{#                    <td>litora</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,013</td>#}
-{#                    <td>torquent</td>#}
-{#                    <td>per</td>#}
-{#                    <td>conubia</td>#}
-{#                    <td>nostra</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,014</td>#}
-{#                    <td>per</td>#}
-{#                    <td>inceptos</td>#}
-{#                    <td>himenaeos</td>#}
-{#                    <td>Curabitur</td>#}
-{#                </tr>#}
-{#                <tr>#}
-{#                    <td>1,015</td>#}
-{#                    <td>sodales</td>#}
-{#                    <td>ligula</td>#}
-{#                    <td>in</td>#}
-{#                    <td>libero</td>#}
-{#                </tr>#}
-{#                </tbody>#}
-{#            </table>#}
-{#        </div>#}
-{#    </div>#}
-{% endblock %}
+                </span>
+
+                {#                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle"
+                     src="/static/img/icon13.gif"
+                     alt="Generic placeholder image" width="140" height="140">
+                <h2>文档公告</h2>
+                <p>1.<a href="/articleDetail/1/">autoCN WIKI</a></p>
+                <p>2.更新说明</p>
+                <p>.</p>
+                <p>.</p>
+                {#                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <img class="img-circle"
+                     src="/static/img/icon11.gif"
+                     alt="Generic placeholder image" width="140" height="140">
+                <h2>数据展示</h2>
+                <p>1.查看 <a href="/dashboard/">通过率</a></p>
+                <p>2.查看 覆盖率</p>
+                <p>3.查看 <a href="/failReason/">失败原因</a></p>
+                <p> .</p>
+                {#                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+        <!-- START THE FEATURETTES -->
+        {% for article in articleList %}
+            {% if article.id in num %}
+                <hr class="featurette-divider">
+                <div class="row featurette">
+                    <div class="col-md-7">
+                        <h2 class="featurette-heading"><a
+                                href="articleDetail/{{ article.id }}">{{ article.articleName }}</a></h2>
+                        <p class="lead">{{ article.aritcleDescription | slice:":200" |safe }}...</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img class="featurette-image img-responsive center-block" style="height: 400px;width: 400px"
+                             src="{{ article.articleImg }}"
+                             alt="Generic placeholder image">
+                    </div>
+                </div>
+            {% else %}
+                <hr class="featurette-divider">  
+                <div class="row featurette"> 
+                    <div class="col-md-7 col-md-push-5">  <h2 class="featurette-heading"><a
+                            href="articleDetail/{{ article.id }}">{{ article.articleName }}</a></h2> 
+                        <p class="lead">{{ article.aritcleDescription | slice:":200"|safe }}...</p> 
+                    </div>
+                    <div class="col-md-5 col-md-pull-7"> 
+                        <img class="featurette-image img-responsive center-block" style="height: 400px;width: 400px"
+                             src="{{ article.articleImg }}"
+                             alt="Generic placeholder image">
+                    </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+
+        <!-- /END THE FEATURETTES -->
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            {#            <p>&copy; 2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>#}
+            <p>&copy; 2019 Design by Kevin Luo. </p>
+
+    </div><!-- /.container -->
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="/static/js/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+</html>

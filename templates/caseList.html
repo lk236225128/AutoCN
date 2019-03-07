@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}autoCN自动化接口平台-用例编辑{% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+    <h2 class="form-signin-heading">测试用例列表</h2>
+    <table class="table table-striped">
+        <tr>
+            <td>部门</td>
+            <td>文件名</td>
+            <td>文件路径</td>
+            <td>操作</td>
+            <td>执行</td>
+        </tr>
+        {% for file in fileList %}
+            <tr>
+                <td>{{ file.department }}</td>
+                <td>{{ file.fileName }}</td>
+                <td>{{ file.filePath }}</td>
+                <td><a href="../caseEditor/?casePath={{ file.filePath }}">编辑</a></td>
+                <td>运行</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+
+{% endblock %}

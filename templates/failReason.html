@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block title %}autoCN自动化接口平台-失败原因汇总{% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+    <h1 class="page-header">失败原因分析</h1>
+    <div class="dropdown text-left">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true" style="width: 150px">
+            {% if department == 'usedCar' %}
+                {% if env == 'onlineEnv' %}
+                    中古车线上环境
+                {% elif env == 'testEnv' %}
+                    中古车测试环境
+                {% endif %}
+            {% elif department == 'newCar' %}
+                {% if env == 'onlineEnv' %}
+                    新车线上环境
+                {% elif env == 'testEnv' %}
+                    新车测试环境
+                {% endif %}
+            {% endif %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 150px">
+            <li><a href="./?department=usedCar&env=testEnv">中古车测试环境</a></li>
+            <li><a href="./?department=usedCar&env=onlineEnv">中古车线上环境</a></li>
+            <li><a href="./?department=newCar&env=testEnv">新车测试环境</a></li>
+            <li><a href="./?department=newCar&env=onlineEnv">新车线上环境</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">其它</a></li>
+        </ul>
+    </div>
+    <div class="row" id="tab2" style="height: auto; width: auto">
+        <div style="height: 410px;min-height: 100px;width:50%;margin: 0 auto" id="failReportchart" class="col-md-6">
+            <script type="text/javascript">
+                var mychart = echarts.init(document.getElementById("failReportchart"), 'macarons');
+                option = {
+                    title: {
+                        text: '执行失败原因分析',
+                        subtext: '接口自动化',
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    series: [
+                        {
+                            name: '暂无数据',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['50%', '60%'],
+                            data: [
+                                {value: 335, name: '暂无数据'},
+
+                            ]
+                        }
+                    ]
+                };
+                mychart.showLoading();
+                var reasonresult = [];
+                $.ajax({
+                    type: "get",
+                    async: true,
+                    url: "/failReport/{{ department }}/{{ env }}",
+                    data: {},
+                    dataType: "json",
+                    success: function (result) {
+                        if (result != null && result.length > 0) {
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i].resultNum >= 1) {
+                                    reasonresult.push({name: result[i].notesCategory, value: result[i].resultNum});
+                                }
+                            }
+                            mychart.hideLoading();
+                            mychart.setOption({
+                                legend: {
+                                    orient: 'vertical',
+                                    x: 'left',
+                                    data: ['直接访问']
+                                },
+                                series: [{
+                                    name: '通过率',
+                                    data: reasonresult,
+                                    type: 'pie',
+                                    radius: '55%',
+                                    areaStyle: {},
+                                    center: ['50%', '60%'],
+                                }],
+                                toolbox: {
+                                    show: true,
+                                    feature: {
+                                        mark: {show: true},
+                                        dataView: {show: true, readOnly: false},
+                                        magicType: {
+                                            show: true,
+                                            type: ['pie', 'funnel'],
+                                            option: {
+                                                funnel: {
+                                                    x: '25%',
+                                                    width: '50%',
+                                                    funnelAlign: 'left',
+                                                    max: 1548
+                                                }
+                                            }
+                                        },
+                                        restore: {show: true},
+                                        saveAsImage: {show: true}
+                                    }
+                                },
+                                calculable: true,
+
+
+                            })
+                        }
+
+                    }
+                })
+                mychart.setOption(option);
+            </script>
+        </div>
+        <div class="table-responsive col-md-6" style="height: 410px;min-height: 100px;width:50%;margin: 0 auto">
+            {#                <h2 class="sub-header" style="width:50%;margin: 0 auto" >Section title</h2>#}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>测试环境</th>
+                    <th>通过率</th>
+                    <th>执行平台</th>
+                    <th>失败原因</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for FailResult in allFailResultList %}
+                    <tr>
+                        <td>{{ FailResult.id }}</td>
+                        <td>{% if FailResult.env == 'onlineEnv' %}
+                            线上环境
+                        {% elif env == 'testEnv' %}
+                            测试环境
+                        {% endif %}</td>
+                        <td>{% widthratio FailResult.passrate 1 100 %}%</td>
+                        <td>{% if FailResult.department == 'usedCar' %}
+                            中古车
+                        {% elif env == 'testEnv' %}
+                            新车
+                        {% endif %}</td>
+                        <td>{{ FailResult.notesCategory }}</td>
+
+
+                    </tr>
+                {% endfor %}
+                <script type="text/javascript">
+                    function addNotes(resultid) {
+                        $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: "/addNotes/" + resultid + "/",
+                            data: {
+                                'notes': $('#notesID' + resultid).val(),
+                                'notesCategory': $('#notesCategoryID' + resultid).val()
+                            },
+                            success: function (data) {
+                                alert("success!");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 500)
+                            },
+                            error: function () {
+                                alert("error!");
+                            }
+                        });
+                    }
+                </script>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+    <div class="table-responsive col-md-12" style="height: 410px;min-height: 100px;width:100%;margin: 0 auto">
+        {#                <h2 class="sub-header" style="width:50%;margin: 0 auto" >Section title</h2>#}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>月份</th>
+                <th>模块</th>
+                <th>失败数</th>
+                <th>总数</th>
+                <th>成功率</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for Analysis in AnalysisList %}
+                <tr>
+                    <td>{{ nowYear }}-{{ nowMonth }}</td>
+                    <td>{{ Analysis.0 }}</td>
+                    <td>{{ Analysis.2 }}</td>
+                    <td>{{ Analysis.1 }}</td>
+                    <td>{% widthratio Analysis.2 Analysis.1 100 %}%</td>
+
+                </tr>
+            {% endfor %}
+            <script type="text/javascript">
+                function addNotes(resultid) {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/addNotes/" + resultid + "/",
+                        data: {
+                            'notes': $('#notesID' + resultid).val(),
+                            'notesCategory': $('#notesCategoryID' + resultid).val()
+                        },
+                        success: function (data) {
+                            alert("success!");
+                            setTimeout(function () {
+                                location.reload();
+                            }, 500)
+                        },
+                        error: function () {
+                            alert("error!");
+                        }
+                    });
+                }
+            </script>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
