@@ -1,0 +1,59 @@
+-   config:
+        name: 登錄/登出参数化驱动
+        parameters:
+        -   account: ${get_account()}
+        request:
+            base_url: $base_url
+            headers:
+                User-Agent: car8891/3.1.1 (iPhone; iOS 11.4; Scale/3.00)
+                Cookie: $cookie
+        setup_hooks:
+        -   ${hook_print(setup)}
+        teardown_hooks:
+        -   ${hook_print(teardown)}
+        variables: []
+-   test:
+        name: 登錄-登錄
+        request:
+            data:
+                account: $account
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                password: a123456
+            headers:
+                Content-Type: application/x-www-form-urlencoded
+            method: POST
+            params:
+                api: '3.7'
+            url: /api/v3/u/login/
+        setup_hooks:
+        -   ${hook_print(step-hooks-setup)}
+        -   ${hook_print($request)}
+        teardown_hooks:
+        -   ${hook_print(step-hooks-teardown)}
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+
+-   test:
+        name: 登錄-登出
+        request:
+            method: GET
+            params:
+                api: '3.7'
+                device_id: 6374466F-2EB8-4013-966E-C921A873E928
+                token: tkpbp904oumego4nnbjps31fk7
+            url: /api/v3/u/logout/
+        validate:
+        -   eq:
+            - status_code
+            - 200
+        -   eq:
+            - headers.Content-Type
+            - application/json; charset=utf-8
+        -   eq:
+            - content.status
+            - OK

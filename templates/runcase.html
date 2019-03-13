@@ -3,68 +3,70 @@
 {% load staticfiles %}
 
 {% block content %}
-    <h1 class="page-header">执行测试用例</h1>
+    <h1 class="page-header">{{ project.projectName }}-执行测试用例</h1>
     <div class="container text-left">
 
-        <form id="from-runCaseInformation" action="/runCase/{{ department }}" method="POST"
+        <form id="from-runCaseInformation" action="/runCase/?department={{ department }}" method="POST"
               style="height: 410px;min-height: 100px;width:500px;margin: 0">
             {% csrf_token %}
-            <span class="text-left">测试平台</span>
+            <span class="text-left">测试项目</span>
             <div class="dropdown text-left" style="width: 300px">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="true" style="width: 300px">
-                    {% if department == 'usedCar' %}
-                        中古车
-                    {% elif department == 'newCar' %}
-                        新车
-                    {% endif %}
+                    {{ project.projectName }}
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 300px">
-                    <li><a href="./?department=usedCar">中古车</a></li>
-                    <li><a href="./?department=newCar">新车</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">其它</a></li>
+                    {% for project in projectList %}
+                        <li><a href="./?department={{ department }}&project={{ project }}">{{ project.projectName }}</a>
+                        </li>
+                    {% endfor %}
+{#                    <li role="separator" class="divider"></li>#}
                 </ul>
             </div>
             <hr>
             <span>环境选择</span>
             <select id="env" name="env" style="width: 300px" class="form-control">
                 {% for env in envList %}
-                <option value="{{ env.env }}">{{ env.envName }}</option>
+                    <option value="{{ env.env }}">{{ env.envName }}</option>
+
+                    {#                    <hr>#}
+                    {#
                 {% endfor %}
             </select>
+            <hr>
+            <span>BaseUrl</span>
+            <input class="form-control" type="text" id="baseUrl" name="baseUrl" style="width: 300px"
+                   { value="https://www.">
             <hr>
             <span>平台选择</span>
             <select id="platform" name="platform" style="width: 300px" class="form-control">
                 {% for platform in platformList %}
-                <option value="{{ platform.platform }}">{{ platform.platform }}</option>
+                    <option value="{{ platform.platformName }}">{{ platform.platformName }}</option>
                 {% endfor %}
             </select>
             <hr>
             <span>执行类型</span>
             <select id="runtype" name="runtype" style="width: 300px" class="form-control">
                 {% for runType in runTypeList %}
-                <option value="{{ runType.runType }}">{{ runType.runType }}</option>
+                    <option value="{{ runType.runTypeName }}">{{ runType.runTypeName }}</option>
                 {% endfor %}
             </select>
             <hr>
             <span>用例路径</span>
             <select id="runPath" name="runPath" style="width: 300px" class="form-control">
                 {% for dir in dirList %}
-                    <option value="{{ dir.dirPath }}">Document:{{ dir.dirPath }}</option>
+                    <option value="{{ dir.dirPath }}">用例库:{{ dir.dirPath }}</option>
                 {% endfor %}
                 {% for file in fileList %}
-                    <option value="{{ file.filePath }}">File:{{ file.fileName }}</option>
+                    <option value="{{ file.filePath }}">用例文件:{{ file.fileName }}</option>
                 {% endfor %}
             </select>
             <hr>
-            <span>taskID</span>
-            <input class="form-control" type="text" id="taskID" name="taskID" style="width: 300px" value="task-100">
+            <span>Cookie(可选)</span>
+            <input class="form-control" type="text" id="cookie" name="cookie" style="width: 300px" value="">
             <hr>
-            <span>BaseUrl</span>
-            <input class="form-control" type="text" id="baseUrl" name="baseUrl" style="width: 300px"
-                   value="https://www.test.8891.com.tw">
+
             <hr>
             <input type="submit" value="执行测试" class="btn btn-primary">
 

@@ -3,7 +3,26 @@
 {% load staticfiles %}
 
 {% block content %}
-    <h2 class="form-signin-heading">测试用例列表</h2>
+    <h2 class="form-signin-heading">{{ project.projectName }}-测试用例列表</h2>
+    <div class="dropdown text-left">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true" style="width: 150px">
+            {% if project.projectName != None %}
+                {{ project.projectName }}
+            {% else %}
+                未选择
+            {% endif %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 150px">
+            {% for project in projectList %}
+                <li><a href="./?department={{ department }}&project={{ project }}">{{ project.projectName }}</a></li>
+            {% empty %}
+                <li>None</li>
+            {% endfor %}
+            <li role="separator" class="divider"></li>
+        </ul>
+    </div>
     <table class="table table-striped">
         <tr>
             <td>部门</td>
@@ -17,7 +36,9 @@
                 <td>{{ file.department }}</td>
                 <td>{{ file.fileName }}</td>
                 <td>{{ file.filePath }}</td>
-                <td><a href="../caseEditor/?casePath={{ file.filePath }}">编辑</a></td>
+                <td>
+                    <a href="../caseEditor/?casePath={{ file.filePath }}&department={{ department }}&project={{ project }}">编辑</a>
+                </td>
                 <td>运行</td>
             </tr>
         {% endfor %}

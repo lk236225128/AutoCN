@@ -3,32 +3,20 @@
 {% load staticfiles %}
 
 {% block content %}
-    <h1 class="page-header">失败原因分析</h1>
+    <h1 class="page-header">{{ project.projectName }}-失败原因分析</h1>
     <div class="dropdown text-left">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="true" style="width: 150px">
-            {% if department == 'usedCar' %}
-                {% if env == 'onlineEnv' %}
-                    中古车线上环境
-                {% elif env == 'testEnv' %}
-                    中古车测试环境
-                {% endif %}
-            {% elif department == 'newCar' %}
-                {% if env == 'onlineEnv' %}
-                    新车线上环境
-                {% elif env == 'testEnv' %}
-                    新车测试环境
-                {% endif %}
-            {% endif %}
+                {{ env.envName }}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 150px">
-            <li><a href="./?department=usedCar&env=testEnv">中古车测试环境</a></li>
-            <li><a href="./?department=usedCar&env=onlineEnv">中古车线上环境</a></li>
-            <li><a href="./?department=newCar&env=testEnv">新车测试环境</a></li>
-            <li><a href="./?department=newCar&env=onlineEnv">新车线上环境</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">其它</a></li>
+            {% for env in envList %}
+                <li><a href="./?department={{ department }}&&project={{ project }}&env={{ env }}">{{ env.envName }}</a></li>
+            {% endfor %}
+
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="#">其它</a></li>#}
         </ul>
     </div>
     <div class="row" id="tab2" style="height: auto; width: auto">

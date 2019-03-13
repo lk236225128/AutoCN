@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
 import xadmin
-
-from autoApi.views import IndexView,RunCaseView,RunPageView,ReturnRateView,reportDetailView,addNotesView,failReportView,dashboardView,caseEditorView,failReasonView,caseListView,articleDetailView,articleListView
-from users.views import loginView,logoutView
+from autoApi.views import RunCaseView,RunPageView,ReturnRateView,reportDetailView,addNotesView,failReportView,dashboardView,caseEditorView,failReasonView,caseListView
+from users.views import IndexView,loginView,logoutView
 
 urlpatterns = [
     #path(route,view,name=None,kwargs=None)
@@ -28,8 +27,8 @@ urlpatterns = [
     path('',IndexView.as_view(),name="index"),
     path('dashboard/', dashboardView.as_view(), name="dashboard"),
     path('runPage/',RunPageView.as_view(),name="runPage"),
-    path('runCase/<department>',RunCaseView.as_view(),name="runCase"),
-    path('returnRate/<department>',ReturnRateView.as_view(),name="returnRate"),
+    path('runCase/',RunCaseView.as_view(),name="runCase"),
+    path('returnRate/',ReturnRateView.as_view(),name="returnRate"),
     path('reportDetail/<reportID>/',reportDetailView.as_view(),name="reportDetail"),
     path('login/',loginView.as_view(),name="login"),
     path('logout/',logoutView.as_view(),name="logout"),
@@ -38,6 +37,8 @@ urlpatterns = [
     path('caseEditor/',caseEditorView.as_view(),name="caseEditor"),
     path('failReason/',failReasonView.as_view(),name="failReason"),
     path('caseList/',caseListView.as_view(),name="caseList"),
-    path('articleDetail/<articleID>/',articleDetailView.as_view(),name="articleDetail"),
-    path('articleList/',articleListView.as_view(),name="articleList")
+    path('article/',include("article.urls",namespace="article")),
 ]
+
+handler404='users.views.page_not_found'
+handler500='users.views.page_error'
