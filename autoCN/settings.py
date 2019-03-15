@@ -25,7 +25,7 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = '65#zc+cv9z%(hm1@_q%ti#r+1m0kt=+7wem3bm_*3l8k--y&++'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'autoCNtest',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'HOST': '172.16.3.204',
         'PORT': 3306,
     }
 }

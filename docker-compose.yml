@@ -1,0 +1,20 @@
+web:
+    image: yetongxue/docker_test:1.2
+    links:
+      - "db"
+    ports:
+      - "8100:8000"
+    volumes:
+      - "${DOCKER_VOLUME_PATH}/docker_test/media:/root/media"
+    restart: always
+
+db:
+    image: mysql:5.7
+    environment:
+      TZ: 'Asia/Shanghai'
+      MYSQL_ROOT_PASSWORD: qwerasdf
+      MYSQL_DATABASE: docker_db
+    restart: always
+    command: ['mysqld', '--character-set-server=utf8']
+    volumes:
+      - "${DOCKER_VOLUME_PATH}/docker_test/db:/var/lib/mysql"
