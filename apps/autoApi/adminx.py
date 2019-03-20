@@ -21,7 +21,7 @@ class NotesCategoryAdmin(object):
 #     list_display=['runType']
 
 class CaseResultAdmin(object):
-    list_display=['id','department','taskid','runType','success','stat_testsRun','stat_successes','stat_failures','stat_skipped','stat_errors','passrate','stat_expectedFailures','stat_unexpectedSuccesses','time_startat','duration','httpRunner_version','python_version','platform','notesCategory','notes','isnotes','env','reporturl']
+    list_display=['id','department','cookie','runType','success','stat_testsRun','stat_successes','stat_failures','stat_skipped','stat_errors','passrate','stat_expectedFailures','stat_unexpectedSuccesses','time_startat','duration','httpRunner_version','python_version','platform','notesCategory','notes','isnotes','env','reporturl']
 
 class CaseDetailAdmin(object):
     list_display=['id','department','env','case_name','case_success','case_stat_testsRun','case_stat_successes','case_stat_failures','case_stat_skipped','case_stat_errors','case_stat_expectedFailures','case_stat_unexpectedSuccesses','case_time_startat','case_time_startmonth','case_time_startyear','case_duration','caseResult']

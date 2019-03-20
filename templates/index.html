@@ -111,9 +111,9 @@
                      alt="Generic placeholder image" width="140" height="140">
                 <h2>功能模块</h2>
                 <span width="50px">
-                    <p>1.<a href="/runPage/">用例执行</a></p>
+{#                    <p>1.<a href="/runPage/">用例执行</a></p>#}
                     <p>2.<a href="/xadmin/">后台管理</a></p>
-                    <p>3.<a href="/dashboard/">DashBoard</a></p>
+{#                    <p>3.<a href="/dashboard/">DashBoard</a></p>#}
                     <p>.</p>
 
                 </span>
@@ -125,7 +125,7 @@
                      src="{% static 'img/system/icon13.gif' %}"
                      alt="Generic placeholder image" width="140" height="140">
                 <h2>文档公告</h2>
-                <p>1.<a href="/articleDetail/1/">autoCN WIKI</a></p>
+{#                <p>1.<a href="article/detail/{{ article.id }}?department={{ department }}&project={{ project }}">autoCN WIKI</a></p>#}
                 <p>2.更新说明</p>
                 <p>.</p>
                 <p>.</p>
@@ -136,9 +136,9 @@
                      src="{% static 'img/system/icon11.gif' %}"
                      alt="Generic placeholder image" width="140" height="140">
                 <h2>数据展示</h2>
-                <p>1.查看 <a href="/dashboard/">通过率</a></p>
-                <p>2.查看 覆盖率</p>
-                <p>3.查看 <a href="/failReason/">失败原因</a></p>
+{#                <p>1.查看 <a href="/dashboard/">通过率</a></p>#}
+{#                <p>2.查看 覆盖率</p>#}
+{#                <p>3.查看 <a href="/failReason/">失败原因</a></p>#}
                 <p> .</p>
                 {#                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>#}
             </div><!-- /.col-lg-4 -->
@@ -150,7 +150,7 @@
                 <div class="row featurette">
                     <div class="col-md-7">
                         <h2 class="featurette-heading"><a
-                                href="articleDetail/{{ article.id }}">{{ article.articleName }}</a></h2>
+                                href="article/detail/{{ article.id }}?department={{ department }}&project={{ project }}">{{ article.articleName }}</a></h2>
                         <p class="lead">{{ article.aritcleDescription | slice:":200" |safe }}...</p>
                     </div>
                     <div class="col-md-5">
@@ -163,7 +163,7 @@
                 <hr class="featurette-divider">  
                 <div class="row featurette"> 
                     <div class="col-md-7 col-md-push-5">  <h2 class="featurette-heading"><a
-                            href="articleDetail/{{ article.id }}">{{ article.articleName }}</a></h2> 
+                            href="article/detail/{{ article.id }}?department={{ department }}&project={{ project }}">{{ article.articleName }}</a></h2> 
                         <p class="lead">{{ article.aritcleDescription | slice:":200"|safe }}...</p> 
                     </div>
                     <div class="col-md-5 col-md-pull-7"> 

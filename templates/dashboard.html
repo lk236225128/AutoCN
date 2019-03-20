@@ -3,9 +3,9 @@
 {% load staticfiles %}
 {% block content %}
     <h1 class="page-header">{% if department.departmentName != None %}
-                {{ department.departmentName }}
-            {% else %}
-            {% endif %}</h1>
+        {{ department.departmentName }}
+    {% else %}
+    {% endif %}</h1>
     <br>
     <div class="dropdown text-left">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
@@ -20,20 +20,24 @@
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 150px">
             {% for project in projectList %}
                 <li><a href="./?department={{ department }}&project={{ project }}">{{ project.projectName }}</a></li>
+                <li role="separator" class="divider"></li>
             {% empty %}
                 <li>None</li>
             {% endfor %}
-            <li role="separator" class="divider"></li>
-{#            <li><a href="#">其它</a></li>#}
+
+            {#            <li><a href="#">其它</a></li>#}
         </ul>
-        <button type="button" class="btn btn-primary" onclick="location='/failReason/?department={{ department }}&project={{ project }}'">失败原因汇总数据
+        <button type="button" class="btn btn-primary"
+                onclick="location='/failReason/?department={{ department }}&project={{ project }}'">失败原因汇总数据
         </button>
-        <button type="button" class="btn btn-info" onclick="location='/runPage/?department={{ department }}&project={{ project }}'">执行测试</button>
+        <button type="button" class="btn btn-info"
+                onclick="location='/runPage/?department={{ department }}&project={{ project }}'">执行测试
+        </button>
     </div>
     <hr>
     <div class="row" id="tab1" style="height: auto; width: auto">
 
-        <div style="height: 410px;min-height: 100px;width:50%;margin: 0 auto" id="mychartmain" class="col-md-6">
+        <div style="height: 410px;min-height: 100px;width:100%;margin: 0 auto" id="mychartmain" class="col-md-12">
             <script type="text/javascript">
                 var mychart = echarts.init(document.getElementById("mychartmain"))
                 option = {
@@ -98,7 +102,7 @@
                                 dataZoom: [
                                     {   // 这个dataZoom组件，默认控制x轴。
                                         type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-                                        start: 75,      // 左边在 10% 的位置。
+                                        start: 70,      // 左边在 10% 的位置。
                                         end: 100         // 右边在 60% 的位置。
                                     }
                                 ],
@@ -134,8 +138,12 @@
             </script>
         </div>
 
+    </div>
+    <hr>
+    <div class="row" id="tab2" style="height: auto; width: auto">
 
-        <div class="table-responsive col-md-6" style="height: 410px;min-height: 100px;width:50%;margin: 0 auto">
+
+        <div class="table-responsive col-md-12" style="height: 1024px;min-height: 100px;width:100%;margin: 0 auto">
             {#                <h2 class="sub-header" style="width:50%;margin: 0 auto" >Section title</h2>#}
             <table class="table table-striped">
                 <thead>
@@ -146,6 +154,11 @@
                     <th>执行用例数</th>
                     <th>通过用例数</th>
                     <th>报告详情</th>
+                    <th>执行端口</th>
+                    <th>执行环境</th>
+                    <th>执行方式</th>
+                    <th>cookie</th>
+                    <th>执行人</th>
                     <th>失败原因</th>
                 </tr>
                 </thead>
@@ -158,6 +171,11 @@
                         <td>{{ result.stat_testsRun }}</td>
                         <td>{{ result.stat_successes }}</td>
                         <td><a href="/reportDetail/{{ result.id }}/">详情</a></td>
+                        <td>{{ result.platform }}</td>
+                        <td>{{ result.env }}</td>
+                        <td>{{ result.runType }}</td>
+                        <td>{{ result.cookie }}</td>
+                        <td>{{ result.runpeople }}</td>
 
                         <td>
                             {% if result.passrate == 100 %}
@@ -240,5 +258,4 @@
         </div>
     </div>
     <hr>
-
 {% endblock %}

@@ -36,10 +36,10 @@
 <div class="container">
 
     <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputUserName" class="sr-only">User Name</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="UserName" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
+        <h2 class="form-signin-heading">请登录</h2>
+        <label for="inputUserName" class="sr-only">用户名</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="默认工号,由部门测试工程师开通" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
             <label>
@@ -48,7 +48,7 @@
                 {% for key,error in login_form.errors.items %}{{ error }}{% endfor %}{{ msg }}
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="登录">Sign in</button>
         {% csrf_token %}
     </form>
 

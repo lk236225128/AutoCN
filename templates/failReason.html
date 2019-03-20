@@ -124,17 +124,9 @@
                 {% for FailResult in allFailResultList %}
                     <tr>
                         <td>{{ FailResult.id }}</td>
-                        <td>{% if FailResult.env == 'onlineEnv' %}
-                            线上环境
-                        {% elif env == 'testEnv' %}
-                            测试环境
-                        {% endif %}</td>
+                        <td>{{ FailResult.env }}</td>
                         <td>{% widthratio FailResult.passrate 1 100 %}%</td>
-                        <td>{% if FailResult.department == 'usedCar' %}
-                            中古车
-                        {% elif env == 'testEnv' %}
-                            新车
-                        {% endif %}</td>
+                        <td>{{ FailResult.platform }}</td>
                         <td>{{ FailResult.notesCategory }}</td>
 
 

@@ -1,10 +1,16 @@
 from django.db import models
+from autoCN.settings import MEDIA_ROOT
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+
+def upload_to(instance, filename):
+    return '/'.join([MEDIA_ROOT, '/yaml/',instance.project.project, filename])
 
 
 # Create your models here.
 
 class Department(models.Model):
-    department = models.CharField(verbose_name='部门(部门用例库根文件名)', max_length=100)
+    department = models.CharField(verbose_name='部门(英文)', max_length=100)
     departmentName = models.CharField(verbose_name='部门(中文)', max_length=100, default='')
 
     class Meta:
@@ -31,7 +37,7 @@ class Env(models.Model):
 
 class Project(models.Model):
     department = models.ForeignKey("Department", verbose_name=u"所属部门", on_delete=models.CASCADE)
-    project = models.CharField(verbose_name=u"项目(项目用例库根文件名)'", max_length=100)
+    project = models.CharField(verbose_name=u"项目(英文)", max_length=100)
     projectName = models.CharField(verbose_name=u"项目(中文)", max_length=100, default='')
 
     class Meta:
@@ -66,3 +72,20 @@ class RunType(models.Model):
 
     def __str__(self):
         return self.runType
+
+
+class Case(models.Model):
+    project = models.ForeignKey("Project", verbose_name='所属项目', on_delete=models.CASCADE)
+    caseName = models.FileField(upload_to=upload_to, verbose_name='用例文件', null=True)
+
+    class Meta:
+        verbose_name = "测试用例"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return str(self.caseName)
+
+
+@receiver(pre_delete, sender=Case)
+def mymodel_delete(sender, instance, **kwargs):
+    instance.caseName.delete(False)

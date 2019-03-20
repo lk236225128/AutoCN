@@ -5,8 +5,11 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import LoginForm
 from django.contrib.auth.backends import ModelBackend
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from .forms import LoginForm
 
 from .models import UserProfile
 from article.models import Article
@@ -37,7 +40,7 @@ class loginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, "index.html", {"username": user})
+                    return HttpResponseRedirect(reverse("index"))
             else:
                 return render(request, "login.html", {"msg": "用户名或密码错误！"})
         else:
@@ -47,7 +50,7 @@ class loginView(View):
 class logoutView(View):
     def get(self, request):
         logout(request)
-        return render(request, "index.html", {})
+        return HttpResponseRedirect(reverse("index"))
 
 
 class IndexView(View):

@@ -1,21 +1,8 @@
 #!/bin/bash
 
-
-#nginx settings
-sed -i '/user/{s/nginx/root/}' /etc/nginx/nginx.conf
-ln -s /root/project/mysite_nginx.conf /etc/nginx/conf.d/
-nginx
-
-chmod u+x wait-for-it.sh
-./wait-for-it.sh $DB_PORT_3306_TCP_ADDR:$DB_PORT_3306_TCP_PORT &
-wait
-
 #application settings
-export DJANGO_SETTINGS_MODULE=mysite.settings.server
-cd mysite
+#export DJANGO_SETTINGS_MODULE=autoCN.settings
+cd /home/docker/code/
 ./manage.py migrate --noinput
 ./manage.py loaddata ./fixtures/superuser.json
 ./manage.py collectstatic --noinput
-
-cd ..
-uwsgi --ini mysite_uwsgi.ini

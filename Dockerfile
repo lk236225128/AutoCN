@@ -12,35 +12,48 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM centos:7
-MAINTAINER yetongxue <me@xander-ye.com>
-ENV TZ "Asia/Shanghai"
+FROM ubuntu:16.04
 
-# Local directory with project source
-ENV DOCKER_SRC=mysite
-# Directory in container for all project files
-ENV DOCKER_HOME=/root
-# Directory in container for project source files
-ENV DOCKER_PROJECT=/root/project
-
-# Create application subdirectories
-WORKDIR $DOCKER_HOME
-RUN mkdir media static
-
-VOLUME ["$DOCKER_HOME/media/"]
+MAINTAINER Dockerfiles
 
 # Install required packages and remove the apt packages cache when done.
-RUN yum -y install epel-release && \
-    yum -y install python-pip && \
-    yum -y install git nginx gcc gcc-c++ python-devel && yum -y install mysql && yum -y install mysql-devel && yum install nc -y && yum clean all &&\
-    pip install --upgrade pip
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+	git \
+	python3 \
+	python3-dev \
+	python3-setuptools \
+	python3-pip \
+	nginx \
+	supervisor \
+	sqlite3 && \
+	pip3 install -U pip setuptools && \
+   rm -rf /var/lib/apt/lists/*
 
-WORKDIR $DOCKER_PROJECT
-COPY ./ ./
+ENV LANG C.UTF-8
 
-RUN pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
+# install uwsgi now because it takes a little while
+RUN pip3 install uwsgi
 
-EXPOSE 8000
-RUN chmod u+x start_script
-ENTRYPOINT ["./start_script"]
+# setup all the configfiles
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-available/default
+COPY supervisor-app.conf /etc/supervisor/conf.d/
+
+# COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
+# to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
+
+COPY requirements.txt /home/docker/code/app/
+RUN pip3 install -r /home/docker/code/app/requirements.txt
+
+# add (the rest of) our code
+COPY . /home/docker/code/
+
+# install django, normally you would remove this step because your project would already
+# be installed in the code/app/ directory
+# RUN django-admin.py startproject website /home/docker/code/app/
+
+EXPOSE 80
+CMD ["supervisord", "-n"]

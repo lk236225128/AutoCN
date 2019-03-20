@@ -10,7 +10,7 @@ class CaseResult(models.Model):
     department = models.CharField(verbose_name='部门', max_length=10, default='')
     project = models.CharField(verbose_name='项目', max_length=30, default='')
     runpeople = models.CharField(verbose_name='执行人', max_length=30, default='')
-    cookie = models.IntegerField(verbose_name='cookie', default=0)
+    cookie = models.CharField(verbose_name='cookie', max_length=100,default='',null=True)
     runType = models.CharField(verbose_name='执行类型', max_length=25, null=True, default='手动执行')
     success = models.BooleanField(verbose_name='执行结果')
     stat_testsRun = models.IntegerField(verbose_name='執行用例數')
@@ -72,8 +72,8 @@ class CaseDetail(models.Model):
     case_stat_unexpectedSuccesses = models.IntegerField(verbose_name='', null=True)  #
 
     case_time_startat = models.FloatField(verbose_name='開始時間')
-    case_time_startmonth = models.ImageField(verbose_name='用例执行月份', null=True)
-    case_time_startyear = models.ImageField(verbose_name='用例执行年份', null=True)
+    case_time_startmonth = models.IntegerField(verbose_name='用例执行月份', null=True)
+    case_time_startyear = models.IntegerField(verbose_name='用例执行年份', null=True)
     case_duration = models.FloatField(verbose_name='耗時')
     caseResult = models.ForeignKey("CaseResult", on_delete=models.CASCADE, null=True)
 

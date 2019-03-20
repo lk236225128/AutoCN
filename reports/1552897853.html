@@ -1,0 +1,2201 @@
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> - TestReport</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      color: #333;
+      margin: 0 auto;
+      width: 960px;
+    }
+    #summary {
+      width: 960px;
+      margin-bottom: 20px;
+    }
+    #summary th {
+      background-color: skyblue;
+      padding: 5px 12px;
+    }
+    #summary td {
+      background-color: lightblue;
+      text-align: center;
+      padding: 4px 8px;
+    }
+    .details {
+      width: 960px;
+      margin-bottom: 20px;
+    }
+    .details th {
+      background-color: skyblue;
+      padding: 5px 12px;
+    }
+    .details tr .passed {
+      background-color: lightgreen;
+    }
+    .details tr .failed {
+      background-color: red;
+    }
+    .details tr .unchecked {
+      background-color: gray;
+    }
+    .details td {
+      background-color: lightblue;
+      padding: 5px 12px;
+    }
+    .details .detail {
+      background-color: lightgrey;
+      font-size: smaller;
+      padding: 5px 10px;
+      text-align: center;
+    }
+    .details .success {
+      background-color: greenyellow;
+    }
+    .details .error {
+      background-color: red;
+    }
+    .details .failure {
+      background-color: salmon;
+    }
+    .details .skipped {
+      background-color: gray;
+    }
+
+    .button {
+      font-size: 1em;
+      padding: 6px;
+      width: 4em;
+      text-align: center;
+      background-color: #06d85f;
+      border-radius: 20px/50px;
+      cursor: pointer;
+      transition: all 0.3s ease-out;
+    }
+    a.button{
+      color: gray;
+      text-decoration: none;
+    }
+    .button:hover {
+      background: #2cffbd;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      transition: opacity 500ms;
+      visibility: hidden;
+      opacity: 0;
+    }
+    .overlay:target {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup {
+      margin: 70px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      width: 50%;
+      position: relative;
+      transition: all 3s ease-in-out;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #333;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+    }
+    .popup .close:hover {
+      color: #06d85f;
+    }
+    .popup .content {
+      max-height: 80%;
+      overflow: auto;
+      text-align: left;
+    }
+
+    @media screen and (max-width: 700px) {
+      .box {
+        width: 70%;
+      }
+      .popup {
+        width: 70%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>Test Report: </h1>
+
+  <h2>Summary</h2>
+  <table id="summary">
+
+    <tr>
+      <th>START AT</th>
+      <td colspan="4">2019-03-18 16:30:53</td>
+    </tr>
+    <tr>
+      <th>DURATION</th>
+      <td colspan="4">0.125 seconds</td>
+    </tr>
+    <tr>
+      <th>PLATFORM</th>
+      <td>HttpRunner 1.5.15 </td>
+      <td>CPython 3.6.2 </td>
+      <td colspan="2">Darwin-16.7.0-x86_64-i386-64bit</td>
+    </tr>
+    <tr>
+      <th>TOTAL</th>
+      <th>SUCCESS</th>
+      <th>FAILED</th>
+      <th>ERROR</th>
+      <th>SKIPPED</th>
+      <!-- <th>ExpectedFailure</th>
+      <th>UnexpectedSuccess</th> -->
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+      <!-- <td>0</td>
+      <td>0</td> -->
+    </tr>
+  </table>
+
+  <h2>Details</h2>
+
+  
+  
+  <h3>登錄/登出</h3>
+  <table id="suite_1" class="details">
+    <tr>
+      <th>base_url</th>
+      <td colspan="2">https://www.</td>
+      <th colspan="2" class="detail">
+        <a class="button" href="#suite_output_1">parameters & output</a>
+        <div id="suite_output_1" class="overlay">
+            <div class="popup">
+                <h2>Parameters and Output</h2>
+                <a class="close" href="#suite_1">&times;</a>
+                <div class="content">
+                  <div style="overflow: auto">
+                      <table>
+                        <tr>
+                          <th>variables</th>
+                          <th>output</th>
+                        </tr>
+                        
+                      </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL: 8</td>
+      <td>SUCCESS: 0</td>
+      <td>FAILED: 0</td>
+      <td>ERROR: 8</td>
+      <td>SKIPPED: 0</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <th colspan="2">Name</th>
+      <th>Response Time</th>
+      <th>Detail</th>
+    </tr>
+
+    
+    
+    <tr id="record_1_1">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-買家登錄</td>
+      <td style="text-align:center;width:6em;">32.47 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_1">log</a>
+        <div id="popup_log_1_1" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_1">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/login/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>Content-Length</strong>: 0
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.8697002
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': '0940138004', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'a123456'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>32.47</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_1">traceback</a>
+          <div id="popup_attachment_1_1" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_1">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104770208>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104770208>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104770208>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_2">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-買家登出</td>
+      <td style="text-align:center;width:6em;">3.1 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_2">log</a>
+        <div id="popup_log_1_2" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_2">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/logout/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          GET
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.912585
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'token': 'tkpbp904oumego4nnbjps31fk7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>3.1</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_2">traceback</a>
+          <div id="popup_attachment_1_2" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_2">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x1047475f8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x1047475f8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x1047475f8>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_3">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-個人賣家登錄</td>
+      <td style="text-align:center;width:6em;">3.36 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_3">log</a>
+        <div id="popup_log_1_3" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_3">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/login/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>Content-Length</strong>: 0
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.916965
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': '0940138003', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'a123456'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>3.36</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_3">traceback</a>
+          <div id="popup_attachment_1_3" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_3">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104770d68>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104770d68>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104770d68>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_4">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-個人賣家登出</td>
+      <td style="text-align:center;width:6em;">2.83 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_4">log</a>
+        <div id="popup_log_1_4" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_4">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/logout/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          GET
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.9217238
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'token': 'tkpbp904oumego4nnbjps31fk7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2.83</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_4">traceback</a>
+          <div id="popup_attachment_1_4" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_4">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104852fd0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104852fd0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104852fd0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_5">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-商家登錄</td>
+      <td style="text-align:center;width:6em;">2.28 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_5">log</a>
+        <div id="popup_log_1_5" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_5">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/login/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>Content-Length</strong>: 0
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.925782
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': 'majia', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'a123456'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2.28</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_5">traceback</a>
+          <div id="popup_attachment_1_5" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_5">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104876438>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876438>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876438>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_6">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-商家登出</td>
+      <td style="text-align:center;width:6em;">2.44 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_6">log</a>
+        <div id="popup_log_1_6" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_6">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/logout/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          GET
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.929203
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'token': 'tkpbp904oumego4nnbjps31fk7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2.44</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_6">traceback</a>
+          <div id="popup_attachment_1_6" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_6">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x1048764e0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x1048764e0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/logout/?api=3.7&device_id=6374466F-2EB8-4013-966E-C921A873E928&token=tkpbp904oumego4nnbjps31fk7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x1048764e0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_7">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-用戶名或密碼為空</td>
+      <td style="text-align:center;width:6em;">2.9 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_7">log</a>
+        <div id="popup_log_1_7" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_7">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/login/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>Content-Length</strong>: 0
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.932978
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': 'majia', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': ''}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2.9</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_7">traceback</a>
+          <div id="popup_attachment_1_7" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_7">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104876d30>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876d30>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876d30>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+    
+    <tr id="record_1_8">
+      <th class="error" style="width:5em;">error</td>
+      <td colspan="2">登錄-用戶名或密碼錯誤</td>
+      <td style="text-align:center;width:6em;">2.63 ms</td>
+      <td class="detail">
+
+        <a class="button" href="#popup_log_1_8">log</a>
+        <div id="popup_log_1_8" class="overlay">
+          <div class="popup">
+            <h2>Request and Response data</h2>
+            <a class="close" href="#record_1_8">&times;</a>
+
+            <div class="content">
+              <h3>Request:</h3>
+              <div style="overflow: auto">
+                <table>
+                  
+                    <tr>
+                      <th>url</th>
+                      <td>
+                        
+                          https://www./api/v3/u/login/
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>method</th>
+                      <td>
+                        
+                          POST
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>headers</th>
+                      <td>
+                        
+                          
+                          <div>
+                            <strong>Content-Length</strong>: 0
+                          </div>
+                          
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>start_timestamp</th>
+                      <td>
+                        
+                          1552897853.9373372
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>data</th>
+                      <td>
+                        
+                          {'account': 'majia', 'device_id': '6374466F-2EB8-4013-966E-C921A873E928', 'password': 'qwe123'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>params</th>
+                      <td>
+                        
+                          {'api': '3.7'}
+                        
+                      </td>
+                    </tr>
+                  
+                    <tr>
+                      <th>body</th>
+                      <td>
+                        
+                          None
+                        
+                      </td>
+                    </tr>
+                  
+                </table>
+              </div>
+
+              <h3>Response:</h3>
+              <div style="overflow: auto">
+                <table>
+                    
+                      
+                      <tr>
+                        <th>status_code</th>
+                        <td>
+                          
+                            N/A
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>headers</th>
+                        <td>
+                          
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                      
+                        
+                      
+                        
+                      
+                      <tr>
+                        <th>encoding</th>
+                        <td>
+                          
+                            None
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                      <tr>
+                        <th>content</th>
+                        <td>
+                          
+                            
+                              <pre></pre>
+                            
+                          
+                        </td>
+                      </tr>
+                    
+                      
+                        
+                  </table>
+              </div>
+
+              <h3>Validators:</h3>
+              <div style="overflow: auto">
+                  <table>
+                    <tr>
+                      <th>check</th>
+                      <th>comparator</th>
+                      <th>expect value</th>
+                      <th>actual value</th>
+                    </tr>
+                    
+                  </table>
+              </div>
+
+              <h3>Statistics:</h3>
+              <div style="overflow: auto">
+                <table>
+                  <tr>
+                      <th>content_size(bytes)</th>
+                      <td>N/A</td>
+                    </tr>
+                  <tr>
+                    <th>response_time(ms)</th>
+                    <td>2.63</td>
+                  </tr>
+                  <tr>
+                    <th>elapsed(ms)</th>
+                    <td>0.0</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        
+          <a class="button" href="#popup_attachment_1_8">traceback</a>
+          <div id="popup_attachment_1_8" class="overlay">
+            <div class="popup">
+              <h2>Traceback Message</h2>
+              <a class="close" href="#record_1_8">&times;</a>
+              <div class="content"><pre>Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/connection.py", line 57, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/socket.py", line 743, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 343, in _make_request
+    self._validate_conn(conn)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 839, in _validate_conn
+    conn.connect()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 301, in connect
+    conn = self._new_conn()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.VerifiedHTTPSConnection object at 0x104876470>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/urllib3/util/retry.py", line 398, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876470>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/api.py", line 58, in test
+    test_runner.run_test(teststep_dict)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/runner.py", line 198, in run_test
+    **parsed_request
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 147, in request
+    self.meta_data["response"]["ok"] = response.ok
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/models.py", line 702, in ok
+    self.raise_for_status()
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 23, in raise_for_status
+    raise self.error
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/httprunner/client.py", line 198, in _send_request_safe_mode
+    return requests.Session.request(self, method, url, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/luokai/anaconda3/envs/autoCN/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='www.', port=443): Max retries exceeded with url: /api/v3/u/login/?api=3.7 (Caused by NewConnectionError('<urllib3.connection.VerifiedHTTPSConnection object at 0x104876470>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',))
+</pre></div>
+            </div>
+          </div>
+        
+
+      </td>
+    </tr>
+  
+  </table>
+  
+</body>

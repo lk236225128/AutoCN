@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.shortcuts import render
 from .models import CaseResult
 from httprunner import HttpRunner
@@ -11,25 +13,31 @@ from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count, Sum
 import os
-
+from autoCN.settings import YAML_ROOT
+from utils.mixin_utils import LoginRequiredMixin
+from users.models import UserProfile
 
 # ok
-class dashboardView(View):
+class dashboardView(LoginRequiredMixin,View):
     def get(self, request):
         resultList = CaseResult.objects.all()
         notesCategory = NotesCategory.objects.all()
 
-        department = request.GET.get('department', "8891")
-        department = Department.objects.get(department=department)
+        department = request.GET.get('department', None)
         project = request.GET.get('project', None)
+
+        try:
+            department = Department.objects.get(department=department)
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"department不存在"})
+
         if project == None:
             project = department.project_set.first()
         else:
             project = Project.objects.get(project=project)
 
-        if department:
-            projectList = department.project_set.all()
-            resultList = resultList.filter(project=project).order_by("-time_startat")
+        projectList = department.project_set.all()
+        resultList = resultList.filter(project=project).order_by("-time_startat")
 
         return render(request, "dashboard.html",
                       context={'resultList': resultList,
@@ -38,6 +46,7 @@ class dashboardView(View):
                                'projectList': projectList,
                                'department': department}
                       )
+
 
 # OK
 class ReturnRateView(View):
@@ -58,21 +67,23 @@ class ReturnRateView(View):
         return HttpResponse(json.dumps(result))
 
 
-# TODO ?department=newCar
-# TODO 前端时间未格式化
-
-class failReasonView(View):
+class failReasonView(LoginRequiredMixin,View):
     def get(self, request):
         # 失败原因汇总
-        department = request.GET.get('department', None)
-        department = Department.objects.get(department=department)
         env = request.GET.get('env', None)
 
+        department = request.GET.get('department', None)
         project = request.GET.get('project', None)
-        if project:
+
+        try:
+            department = Department.objects.get(department=department)
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"department不存在"})
+
+        try:
             project = Project.objects.get(project=project)
-        else:
-            project = department.project_set.first()
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"project不存在"})
 
         if env:
             env = Env.objects.get(env=env)
@@ -81,13 +92,10 @@ class failReasonView(View):
 
         envList = project.env_set.all()
 
-        if department:
-            projectList = department.project_set.all()
+        projectList = department.project_set.all()
+        # failResultList = CaseResult.objects.all()
 
-        failResultList = CaseResult.objects.all()
-
-        failResultList = failResultList.filter(notesCategory__isnull=False).filter(department=department,
-                                                                                   env=env).order_by('-id')
+        failResultList = CaseResult.objects.filter(notesCategory__isnull=False).filter(department=department,env=env).order_by('-id')
 
         nowYear = time.strftime("%Y", time.localtime())
         nowMonth = time.strftime("%m", time.localtime())
@@ -110,20 +118,22 @@ class failReasonView(View):
                                "projectList": projectList,
                                "envList": envList})
 
-
 class RunPageView(View):
     def get(self, request):
         department = request.GET.get('department', None)
-
         project = request.GET.get('project', None)
-        if project:
-            project = Project.objects.get(project=project)
-        else:
-            project = department.project_set.first()
 
-        if department:
+        try:
             department = Department.objects.get(department=department)
-            projectList = department.project_set.all()
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"department不存在"})
+
+        try:
+            project = Project.objects.get(project=project)
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"project不存在"})
+
+        projectList = department.project_set.all()
 
         envList = project.env_set.all()
         platformList = project.platform_set.all()
@@ -131,7 +141,8 @@ class RunPageView(View):
 
         dirList = []
         fileList = []
-        for root, dirs, files in os.walk('/Users/luokai/autoProjects/autoCN/yaml'):
+        yamlpath = os.path.join(YAML_ROOT, str(project))
+        for root, dirs, files in os.walk(yamlpath):
             if dirs:
                 for y in dirs:
                     dirPath = root + '/' + y
@@ -151,41 +162,59 @@ class RunPageView(View):
                                "projectList": projectList})
 
 
-class RunCaseView(View):
+class RunCaseView(LoginRequiredMixin,View):
     def post(self, request):
-        department = request.GET.get('department', "8891")
+        # department = request.GET.get('department', "8891")
         project = request.POST.get("project", "usedCar")
+        department=Project.objects.get(project=project).department
         platform = request.POST.get('platform', "PC")
-        baseUrl = request.POST['baseUrl']
-        runPath = request.POST['runPath']
-        runType = request.POST['runtype']
-        env = request.POST['env']
-        cookie = request.POST['cookie']
+        runPath = request.POST.get('runPath')
+        runType = request.POST.get('runtype')
+        env = request.POST.get('env')
+        baseUrl = request.POST.get('baseUrl','')
+        # baseUrl=Env.objects.get(env=env).baseUrl
+        cookie = request.POST.get('cookie')
+        runpeople=str(request.user.username)
 
-        time_startat = RunCase(self, department, project, baseUrl, runPath, runType, env, platform, cookie)
+        time_startat = RunCase(self, department, project, baseUrl, runPath, runType, env, platform, cookie,runpeople)
 
         case = CaseResult.objects.filter(time_startat=time_startat).first().case_reports
 
         return render(request, "view_report.html", context={'detail': mark_safe(case)})
 
+#http://172.16.3.204:8000/jenkinsRunCase/?project=usedCar&platform=Android&runType=hand&env=test&jobnumber=10666&cookie=task-1001009
+class JenkinsRunCaseView(View):
+    def get(self, request):
+        project = request.GET.get("project", "usedCar")
+        department=Project.objects.get(project=project).department
+        platform = request.GET.get('platform', "")
+        #默认执行所有用例
+        yamlpath = os.path.join(YAML_ROOT, str(project))
+        runPath = request.GET.get('runPath',yamlpath)
+        runType = request.GET.get('runType')
+        runType=str(RunType.objects.get(runType=runType).runTypeName)
+        env = request.GET.get('env','')
+        baseUrl=Env.objects.get(env=env).baseUrl
+
+        env=str(Env.objects.get(env=env).envName)
+        #自动根据env选择baseUrl
+        cookie = request.GET.get('cookie','')
+        jobnumber = request.GET.get('jobnumber')
+        runpeople=str(UserProfile.objects.get(jobnumber=jobnumber).username)
+
+        time_startat = RunCase(self, department, project, baseUrl, runPath, runType, env, platform, cookie,runpeople)
+        # case = CaseResult.objects.filter(time_startat=time_startat).first().case_reports
+        # return render(request, "view_report.html", context={'detail': mark_safe(case)})
+        return HttpResponse('{"status":"success", "msg":"run success"}', content_type='application/json')
+
 
 # 调用HttpRunner执行用例,并存入数据库
-def RunCase(self, department, project, baseUrl, runPath, runType, env, platform, cookie):
-    if env == 'testEnv':
-        override_mapping = {
+def RunCase(self, department, project, baseUrl, runPath, runType, env, platform, cookie,runpeople):
+
+    override_mapping = {
             "base_url": baseUrl,
             "cookie": cookie
-        }
-    elif env == 'onlineEnv':
-        override_mapping = {
-            "base_url": baseUrl,
-            "cookie": ''
-        }
-    else:
-        override_mapping = {
-            "base_url": baseUrl,
-            "cookie": ''
-        }
+    }
     runner = HttpRunner(failfast=False);
     runner.run(runPath, mapping=override_mapping);
     summary = runner.summary;
@@ -237,7 +266,9 @@ def RunCase(self, department, project, baseUrl, runPath, runType, env, platform,
                             env=env,
                             reporturl=reporturl,
                             department=department,
-                            project=project);
+                            project=project,
+                            cookie=cookie,
+                            runpeople=runpeople);
     caseResult.save()
     if (len(detail["details"]) > 0):
 
@@ -291,8 +322,7 @@ class reportDetailView(View):
         return render(request, "view_report.html", context={'detail': mark_safe(case)})
 
 
-# OK
-class addNotesView(View):
+class addNotesView(LoginRequiredMixin,View):
     def get(self, request):
         pass
 
@@ -324,22 +354,26 @@ class failReportView(View):
         pass
 
 
-class caseListView(View):
+class caseListView(LoginRequiredMixin,View):
     def get(self, request):
         department = request.GET.get('department', None)
-
         project = request.GET.get('project', None)
-        if project:
-            project = Project.objects.get(project=project)
-        else:
-            project = department.project_set.first()
 
-        if department:
+        try:
             department = Department.objects.get(department=department)
-            projectList = department.project_set.all()
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"department不存在"})
+
+        try:
+            project = Project.objects.get(project=project)
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"project不存在"})
+
+        projectList = department.project_set.all()
 
         fileList = []
-        for root, dirs, files in os.walk('/Users/luokai/autoProjects/autoCN/yaml'):
+        yamlpath = os.path.join(YAML_ROOT, str(project))
+        for root, dirs, files in os.walk(yamlpath):
             if files:
                 for x in files:
                     fileName = x
@@ -351,19 +385,22 @@ class caseListView(View):
                                "projectList": projectList})
 
 
-class caseEditorView(View):
+class caseEditorView(LoginRequiredMixin,View):
     def get(self, request):
         department = request.GET.get('department', None)
-
         project = request.GET.get('project', None)
-        if project:
-            project = Project.objects.get(project=project)
-        else:
-            project = department.project_set.first()
 
-        if department:
+        try:
             department = Department.objects.get(department=department)
-            projectList = department.project_set.all()
+        except Exception as e:
+            return render(request, "errorPage.html",context={"message":"department不存在"})
+
+        if project == None:
+            project = department.project_set.first()
+        else:
+            project = Project.objects.get(project=project)
+
+        projectList = department.project_set.all()
 
         casePath = request.GET.get("casePath")
         with open(casePath, encoding='utf-8') as stream:

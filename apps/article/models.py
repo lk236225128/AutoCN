@@ -10,7 +10,7 @@ class Article(models.Model):
     add_time = models.DateTimeField(default=datetime.datetime.now, verbose_name="添加时间 ")
     aritcleDescription = models.TextField(verbose_name="文章简述", null=True)
     aritcleContent = models.TextField(verbose_name="文章内容")
-    articleImg = models.ImageField(upload_to="static/img/%Y/%m", verbose_name="封面图", max_length=100)
+    articleImg = models.ImageField(upload_to="static/img/system/%Y/%m", verbose_name="封面图", max_length=100)
 
     class Meta:
         verbose_name = "文章管理"

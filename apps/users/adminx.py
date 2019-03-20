@@ -40,7 +40,7 @@ class BaseSetting(object):
     use_bootswatch = True
 
 class GlobalSettings(object):
-    site_title = "autoCN台管理系统"
+    site_title = "autoCN后台管理系统"
     site_footer = "autoCN自动化平台"
     # menu_style = "accordion"
 

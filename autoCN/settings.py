@@ -15,8 +15,8 @@ import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
-sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -25,12 +25,12 @@ sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))
 SECRET_KEY = '65#zc+cv9z%(hm1@_q%ti#r+1m0kt=+7wem3bm_*3l8k--y&++'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-AUTHENTICATION_BACKENDS=(
+AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
 )
 
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'organization',
 ]
 
-AUTH_USER_MODEL="users.UserProfile"
+AUTH_USER_MODEL = "users.UserProfile"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,6 +92,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '172.16.3.204',
+        # 'HOST': '192.168.3.26',
         'PORT': 3306,
     }
 }
@@ -131,6 +132,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=(
-    os.path.join(BASE_DIR,"static"),
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
 )
+
+# YAML=os.path.join(BASE_DIR,"yaml")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
+MEDIA_URL = '/upload/'
+YAML_ROOT = os.path.join(BASE_DIR, 'upload/yaml')
+

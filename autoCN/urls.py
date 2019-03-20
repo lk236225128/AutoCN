@@ -17,7 +17,7 @@ Including another URLconf
 from django.urls import path,include
 
 import xadmin
-from autoApi.views import RunCaseView,RunPageView,ReturnRateView,reportDetailView,addNotesView,failReportView,dashboardView,caseEditorView,failReasonView,caseListView
+from autoApi.views import RunCaseView,RunPageView,ReturnRateView,reportDetailView,addNotesView,failReportView,dashboardView,caseEditorView,failReasonView,caseListView,JenkinsRunCaseView
 from users.views import IndexView,loginView,logoutView
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('dashboard/', dashboardView.as_view(), name="dashboard"),
     path('runPage/',RunPageView.as_view(),name="runPage"),
     path('runCase/',RunCaseView.as_view(),name="runCase"),
+    path('jenkinsRunCase/',JenkinsRunCaseView.as_view(),name="jenkinsRunCase"),
     path('returnRate/',ReturnRateView.as_view(),name="returnRate"),
     path('reportDetail/<reportID>/',reportDetailView.as_view(),name="reportDetail"),
     path('login/',loginView.as_view(),name="login"),
